@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using UnityEngine;
 
 namespace Logic.Abilities
 {
-    public class RangedAttack : MonoBehaviour, ICharacterAbility
+    public class RangedAttack : CharacterAbility
     {
-        public IEnumerator Execute()
+        public override IEnumerator Execute()
         {
             yield break;
         }

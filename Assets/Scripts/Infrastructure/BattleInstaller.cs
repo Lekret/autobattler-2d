@@ -9,11 +9,9 @@ namespace Infrastructure
     public class BattleInstaller : MonoInstaller
     {
         public SpawnPoints SpawnPoints;
-        public Camera CameraPrefab;
 
         public override void InstallBindings()
         {
-            Container.Bind<Camera>().FromComponentInNewPrefab(CameraPrefab).AsSingle();
             Container.BindInterfacesTo<GameStateMachine>().AsSingle();
             Container.BindInterfacesTo<SetupState>().AsSingle();
             Container.BindInterfacesTo<BattleState>().AsSingle();

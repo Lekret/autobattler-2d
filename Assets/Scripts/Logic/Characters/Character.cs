@@ -7,17 +7,12 @@ namespace Logic.Characters
 {
     public class Character : MonoBehaviour
     {
-        private ICharacterAbility _ability;
+        [SerializeField] private CharacterAbility _ability;
         
         public Team Team { get; private set; }
         public int Hp { get; private set; }
         public int MaxHp { get; private set; }
 
-        private void Awake()
-        {
-            _ability = GetComponentInChildren<ICharacterAbility>();
-        }
-        
         public void SetTeam(Team team)
         {
             Team = team;

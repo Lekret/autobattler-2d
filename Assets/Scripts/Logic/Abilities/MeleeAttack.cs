@@ -5,13 +5,13 @@ using Zenject;
 
 namespace Logic.Abilities
 {
-    public class MeleeAttack : MonoBehaviour, ICharacterAbility
+    public class MeleeAttack : CharacterAbility
     {
         [SerializeField] private Animator _animator;
 
         [Inject] private ICharacterCollection _characters;
         
-        public IEnumerator Execute()
+        public override IEnumerator Execute()
         {
             yield break;
         }

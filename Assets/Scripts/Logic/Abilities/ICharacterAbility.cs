@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 namespace Logic.Abilities
 {
-    public interface ICharacterAbility
+    public abstract class CharacterAbility : MonoBehaviour
     {
-        IEnumerator Execute();
+        public abstract IEnumerator Execute();
     }
 }
