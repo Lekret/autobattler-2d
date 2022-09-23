@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 157411113415974065}
   - component: {fileID: 215261234129668638}
   - component: {fileID: 4531456089324449786}
+  - component: {fileID: 6775804260796347849}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -179,4 +180,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4a06726c1040ccaa72fe8517e98d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 215261234129668638}
   _animator: {fileID: 3918313891174934245}
+  _approachSpeed: 4
+--- !u!114 &6775804260796347849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098023005220865308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a6d67b8c7143b8820b3c97a4d061ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

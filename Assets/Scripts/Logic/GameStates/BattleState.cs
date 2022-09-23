@@ -43,9 +43,8 @@ namespace Logic.GameStates
             while (true)
             {
                 var characters = _aliveCharacters.GetByTeam(_currentTeam);
-                var rnd = _randomizer.Range(0, characters.Count);
-                var character = characters[rnd];
-                _currentTeam = _currentTeam == Team.Left ? Team.Right : Team.Left;
+                var character = _randomizer.GetRandom(characters);
+                _currentTeam = _currentTeam.Opposite();
                 yield return character.ExecuteAbility();
             }
         }

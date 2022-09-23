@@ -27,7 +27,7 @@ namespace Logic.Characters
         
         public IEnumerator ExecuteAbility()
         {
-            return _ability.Execute();
+            return _ability.Execute(this);
         }
         
         private void Awake()
