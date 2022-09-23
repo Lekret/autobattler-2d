@@ -21,8 +21,7 @@ namespace Logic.Characters
         {
             var data = _characterStaticData[id];
             var character = _instantiator.InstantiatePrefabForComponent<Character>(data.Prefab);
-            character.SetTeam(team);
-            character.SetHp(data.Hp);
+            character.Init(team, data.Hp);
             character.transform.position = position;
             return character;
         }

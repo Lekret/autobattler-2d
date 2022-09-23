@@ -2,9 +2,9 @@
 
 namespace Logic.GameStates
 {
-    public class ResultState : IEnterState
+    public class ResultState : IEnterState<Team>
     {
-        public void Enter()
+        public void Enter(Team winnersTeam)
         {
             
         }

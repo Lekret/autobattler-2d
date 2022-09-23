@@ -9,7 +9,7 @@ namespace Logic.Abilities
     {
         [SerializeField] private Animator _animator;
 
-        [Inject] private ICharacterCollection _characters;
+        [Inject] private IAliveCharacters _characters;
         
         public override IEnumerator Execute()
         {

@@ -15,7 +15,7 @@ namespace Infrastructure
             BindGameStates();
             Container.Bind<SpawnPoints>().FromInstance(SpawnPoints).AsSingle();
             Container.BindInterfacesTo<CharacterFactory>().AsSingle();
-            Container.BindInterfacesTo<CharacterCollection>().AsSingle();
+            Container.BindInterfacesTo<AliveCharacters>().AsSingle();
         }
 
         private void BindGameStates()
