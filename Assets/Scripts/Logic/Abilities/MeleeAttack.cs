@@ -60,11 +60,12 @@ namespace Logic.Abilities
 
         private IEnumerator MoveTo(Character character, Vector3 position)
         {
+            var characterTransform = character.transform;
             _animator.Play(MoveHash);
-            while ((character.transform.position - position).sqrMagnitude > Vector3.kEpsilon)
+            while ((characterTransform.position - position).sqrMagnitude > Vector3.kEpsilon)
             {
-                character.transform.position = Vector3.MoveTowards(
-                    character.transform.position,
+                characterTransform.position = Vector3.MoveTowards(
+                    characterTransform.position,
                     position,
                     _approachSpeed * Time.deltaTime);
                 yield return null;
