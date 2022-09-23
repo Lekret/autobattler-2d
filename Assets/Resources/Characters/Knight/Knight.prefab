@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1796934269710878602}
   - component: {fileID: 2552145885572122142}
-  - component: {fileID: 3918313891174934245}
+  - component: {fileID: 3779025896561824426}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3918313891174934245
+--- !u!95 &3779025896561824426
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 4517222745617962359}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69e9cbf4ab2e4f64eade6d70231d878b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 215261234129668638}
-  _animator: {fileID: 3918313891174934245}
+  _animator: {fileID: 3779025896561824426}
   _approachSpeed: 4
 --- !u!114 &6775804260796347849
 MonoBehaviour:

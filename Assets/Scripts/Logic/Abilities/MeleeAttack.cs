@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Logic.Characters;
 using Services.Randomizer;
 using UnityEngine;
@@ -14,7 +15,16 @@ namespace Logic.Abilities
 
         [Inject] private IAliveCharacters _characters;
         [Inject] private IRandomizer _randomizer;
-        
+
+        private static readonly int IdleHash = Animator.StringToHash("Idle");
+        private static readonly int MoveHash = Animator.StringToHash("Move");
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
+
+        private void Awake()
+        {
+            _animator.Play(IdleHash);
+        }
+
         public override IEnumerator Execute(Character character)
         {
             var initialPosition = character.transform.position;
@@ -32,8 +42,12 @@ namespace Logic.Abilities
 
         private IEnumerator AttackOpponent(Character opponent)
         {
-            Debug.LogError("ATTACK");
-            yield break;
+            _animator.Play(AttackHash);
+            yield return new WaitUntil(() =>
+            {
+                var state = _animator.GetCurrentAnimatorStateInfo(0);
+                return state.shortNameHash == AttackHash && state.normalizedTime >= 1;
+            });
         }
 
         private IEnumerator ReturnBack(Character character, Vector3 initialPosition)
@@ -41,10 +55,12 @@ namespace Logic.Abilities
             _sprite.SetFlipX(character.Team == Team.Left);
             yield return MoveTo(character, initialPosition);
             _sprite.SetFlipX(character.Team == Team.Right);
+            _animator.Play(IdleHash);
         }
 
         private IEnumerator MoveTo(Character character, Vector3 position)
         {
+            _animator.Play(MoveHash);
             while ((character.transform.position - position).sqrMagnitude > Vector3.kEpsilon)
             {
                 character.transform.position = Vector3.MoveTowards(
