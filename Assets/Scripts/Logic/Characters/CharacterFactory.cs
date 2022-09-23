@@ -23,6 +23,7 @@ namespace Logic.Characters
             var character = _instantiator.InstantiatePrefabForComponent<Character>(data.Prefab);
             character.SetTeam(team);
             character.SetHp(data.Hp);
+            character.transform.position = position;
             return character;
         }
     }

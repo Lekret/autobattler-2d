@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0b530708d434d43b816cdcac089c3ac, type: 3}
-  m_Name: CharacterData
+  m_Name: KnightData
   m_EditorClassIdentifier: 
-  Id: 
-  Prefab: {fileID: 0}
-  Hp: 0
+  Id: knight
+  Hp: 100
+  Prefab: {fileID: 157411113415974065, guid: cdfff9fdbf166ec4994f398043d50dda, type: 3}

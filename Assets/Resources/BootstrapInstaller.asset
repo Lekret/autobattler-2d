@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfddc3a442047fd93667ef90bf23cec, type: 3}
+  m_Name: BootstrapInstaller
+  m_EditorClassIdentifier: 
+  CharacterStaticData:
+  - {fileID: 11400000, guid: d2fe18f9dabc26c4f8cceb6324fea53f, type: 2}
+  LoadingScreenPrefab: {fileID: 3375618264176119688, guid: b6f418706ee7b6d4ba11b85aa5e355e2, type: 3}

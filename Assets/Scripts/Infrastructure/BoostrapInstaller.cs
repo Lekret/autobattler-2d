@@ -5,10 +5,12 @@ using Services.SceneLoader;
 using StaticData;
 using Zenject;
 using Ui;
+using UnityEngine;
 
 namespace Infrastructure
 {
-    public class BoostrapInstaller : MonoInstaller, ICoroutineRunner
+    [CreateAssetMenu(menuName = "Installers/BoostrapInstaller", fileName = "BootstrapInstaller")]
+    public class BoostrapInstaller : ScriptableObjectInstaller
     {
         public CharacterStaticData[] CharacterStaticData;
         public LoadingScreen LoadingScreenPrefab;
@@ -17,8 +19,7 @@ namespace Infrastructure
         {
             Container.BindInterfacesTo<SceneLoader>().AsSingle();
             Container.BindInterfacesTo<Randomizer>().AsSingle();
-            Container.BindInterfacesTo<CharacterFactory>().AsSingle();
-            Container.Bind<ICoroutineRunner>().FromInstance(this).AsSingle();
+            Container.BindInterfacesTo<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesTo<EntryPoint>().AsSingle().WithArguments(LoadingScreenPrefab);
             Container.BindInstances(CharacterStaticData);
         }

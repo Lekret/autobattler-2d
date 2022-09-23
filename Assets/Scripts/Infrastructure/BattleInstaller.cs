@@ -1,7 +1,7 @@
 ﻿using Infrastructure.States;
 using Logic;
+using Logic.Characters;
 using Logic.GameStates;
-using UnityEngine;
 using Zenject;
 
 namespace Infrastructure
@@ -12,10 +12,19 @@ namespace Infrastructure
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<GameStateMachine>().AsSingle();
-            Container.BindInterfacesTo<SetupState>().AsSingle();
-            Container.BindInterfacesTo<BattleState>().AsSingle();
+            BindGameStates();
             Container.Bind<SpawnPoints>().FromInstance(SpawnPoints).AsSingle();
+            Container.BindInterfacesTo<CharacterFactory>().AsSingle();
+            Container.BindInterfacesTo<CharacterCollection>().AsSingle();
+        }
+
+        private void BindGameStates()
+        {
+            Container.BindInterfacesTo<GameStateMachine>().AsSingle()
+                .OnInstantiated<GameStateMachine>((_, gsm) => gsm.Enter<SetupState>());
+            Container.BindInterfacesAndSelfTo<SetupState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ResultState>().AsSingle();
         }
     }
 }
