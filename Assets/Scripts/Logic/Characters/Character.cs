@@ -25,9 +25,9 @@ namespace Logic.Characters
             _sprite.SetFlipX(team == Team.Right);
         }
         
-        public void ExecuteAbility(Action onEnd)
+        public IEnumerator ExecuteAbility()
         {
-            StartCoroutine(InternalExecuteAbility(onEnd));
+            return _ability.Execute();
         }
         
         private void Awake()
@@ -52,12 +52,6 @@ namespace Logic.Characters
         private void Die()
         {
             _isDead = true;
-        }
-
-        private IEnumerator InternalExecuteAbility(Action onEnd)
-        {
-            yield return _ability.Execute();
-            onEnd?.Invoke();
         }
     }
 }

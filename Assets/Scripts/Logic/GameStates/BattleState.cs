@@ -1,20 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using Infrastructure.States;
 using Logic.Characters;
-using StaticData;
+using Services.CoroutineRunner;
+using Services.Randomizer;
+using UnityEngine;
 
 namespace Logic.GameStates
 {
-    public class BattleState : IEnterState, ITickState, IExitState
+    public class BattleState : IEnterState, IExitState
     {
         private readonly IGameStateMachine _stateMachine;
         private readonly IAliveCharacters _aliveCharacters;
-        private Team _startTeam = Team.Left;
+        private readonly IRandomizer _randomizer;
+        private readonly ICoroutineRunner _coroutineRunner;
+        private Coroutine _battleRoutine;
+        private Team _currentTeam = Team.Left;
 
-        public BattleState(IGameStateMachine stateMachine, IAliveCharacters aliveCharacters)
+        public BattleState(
+            IGameStateMachine stateMachine, 
+            IAliveCharacters aliveCharacters, 
+            IRandomizer randomizer, 
+            ICoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
             _aliveCharacters = aliveCharacters;
+            _randomizer = randomizer;
+            _coroutineRunner = coroutineRunner;
         }
 
         public void Enter()
@@ -23,8 +34,22 @@ namespace Logic.GameStates
             {
                 character.Died += OnCharacterDied;
             }
+
+            _battleRoutine = _coroutineRunner.StartCoroutine(RunBattle());
         }
-        
+
+        private IEnumerator RunBattle()
+        {
+            while (true)
+            {
+                var characters = _aliveCharacters.GetByTeam(_currentTeam);
+                var rnd = _randomizer.Range(0, characters.Count);
+                var character = characters[rnd];
+                _currentTeam = _currentTeam == Team.Left ? Team.Right : Team.Left;
+                yield return character.ExecuteAbility();
+            }
+        }
+
         public void Exit()
         {
             foreach (var character in _aliveCharacters.GetAll())
@@ -39,6 +64,7 @@ namespace Logic.GameStates
             var winnersTeam = GetWinnersTeam();
             if (winnersTeam.HasValue)
             {
+                _coroutineRunner.StopCoroutine(_battleRoutine);
                 _stateMachine.Enter<ResultState, Team>(winnersTeam.Value);
             }
         }
@@ -52,11 +78,6 @@ namespace Logic.GameStates
                 return null;
             }
             return leftAlive.Count > 0 ? Team.Left : Team.Right;
-        }
-
-        public void Tick()
-        {
-            
         }
     }
 }
