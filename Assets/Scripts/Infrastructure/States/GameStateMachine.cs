@@ -16,7 +16,9 @@ namespace Infrastructure.States
         {
             var state = ChangeState<TState>();
             if (state is IEnterState enterState)
+            {
                 enterState.Enter();
+            }
         }
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IEnterState<TPayload>
@@ -28,7 +30,9 @@ namespace Infrastructure.States
         private TState ChangeState<TState>() where TState : class, IState
         {
             if (_currentState is IExitState exitState)
+            {
                 exitState.Exit();
+            }
             var state = GetState<TState>();
             _currentState = state;
             return state;
