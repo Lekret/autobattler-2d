@@ -8,6 +8,7 @@ namespace Logic.Characters
     public class Character : MonoBehaviour
     {
         [SerializeField] private CharacterAbility _ability;
+        [SerializeField] private CharacterSprite _sprite;
         
         public Team Team { get; private set; }
         public int Hp { get; private set; }
@@ -16,6 +17,7 @@ namespace Logic.Characters
         public void SetTeam(Team team)
         {
             Team = team;
+            _sprite.SetFlipX(team == Team.Right);
         }
         
         public void SetHp(int hp)
