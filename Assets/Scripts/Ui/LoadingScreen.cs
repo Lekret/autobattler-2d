@@ -27,7 +27,7 @@ namespace Ui
         private void SetProgress(float progress)
         {
             _canvasGroup.alpha = 1;
-            _progress.text = $"{progress}%";
+            _progress.text = $"{progress * 100}%";
         }
         
         private void Hide()
