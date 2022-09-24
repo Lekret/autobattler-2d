@@ -23,7 +23,7 @@ namespace Infrastructure
             Container.BindInterfacesTo<GameModeService>().AsSingle();
             Container.BindInterfacesTo<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesTo<EntryPoint>().AsSingle().WithArguments(LoadingScreenPrefab);
-            Container.BindInterfacesTo<StaticDataService>().AsSingle().WithArguments(CharacterStaticData);
+            Container.BindInterfacesTo<CharacterDataService>().AsSingle().WithArguments(CharacterStaticData);
         }
 
         private class EntryPoint : IInitializable

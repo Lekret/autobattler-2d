@@ -4,11 +4,11 @@ using StaticData;
 
 namespace Services.StaticData
 {
-    public class StaticDataService : IStaticDataService
+    public class CharacterDataService : ICharacterDataService
     {
         private readonly Dictionary<string, CharacterStaticData> _characterStaticData;
 
-        public StaticDataService(IEnumerable<CharacterStaticData> data)
+        public CharacterDataService(IEnumerable<CharacterStaticData> data)
         {
             _characterStaticData = data.ToDictionary(x => x.Id, x => x);
         }

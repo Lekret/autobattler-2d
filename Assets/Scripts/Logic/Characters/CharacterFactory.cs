@@ -9,18 +9,18 @@ namespace Logic.Characters
 {
     public class CharacterFactory : ICharacterFactory
     {
-        private readonly IStaticDataService _staticDataService;
+        private readonly ICharacterDataService _characterDataService;
         private readonly IInstantiator _instantiator;
 
-        public CharacterFactory(IStaticDataService staticDataService, IInstantiator instantiator)
+        public CharacterFactory(ICharacterDataService characterDataService, IInstantiator instantiator)
         {
             _instantiator = instantiator;
-            _staticDataService = staticDataService;
+            _characterDataService = characterDataService;
         }
         
         public Character Create(string id, Team team, Vector3 position)
         {
-            var data = _staticDataService.GetById(id);
+            var data = _characterDataService.GetById(id);
             var character = _instantiator.InstantiatePrefabForComponent<Character>(data.Prefab);
             character.Init(team, data.Hp);
             character.transform.position = position;
