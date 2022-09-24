@@ -115,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2285158692861818677}
   - component: {fileID: 157411113415974065}
-  - component: {fileID: 215261234129668638}
   - component: {fileID: 6775804260796347849}
   - component: {fileID: -155446026217231232}
   - component: {fileID: 27496356729429052}
@@ -157,20 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _action: {fileID: 2461994971326874321}
   _health: {fileID: 6775804260796347849}
-  _sprite: {fileID: 215261234129668638}
---- !u!114 &215261234129668638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5098023005220865308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff7a2fcabdc4b10894f68603b82b132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 2552145885572122142}
+  _sprite: {fileID: 2552145885572122142}
 --- !u!114 &6775804260796347849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 157411113415974065}
-  _sprite: {fileID: 215261234129668638}
   _movement: {fileID: 389440101586184029}
   _meleeAttack: {fileID: 8112053291854422964}
   _animator: {fileID: 3779025896561824426}
@@ -276,7 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _approachSpeed: 4
-  _sprite: {fileID: 215261234129668638}
   _character: {fileID: 157411113415974065}
   _animator: {fileID: 3779025896561824426}
 --- !u!114 &8112053291854422964

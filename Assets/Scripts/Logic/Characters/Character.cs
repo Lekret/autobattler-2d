@@ -9,7 +9,7 @@ namespace Logic.Characters
     {
         [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
-        [SerializeField] private CharacterSprite _sprite;
+        [SerializeField] private SpriteRenderer _sprite;
 
         private bool _isDead;
 
@@ -22,7 +22,7 @@ namespace Logic.Characters
         {
             Team = team;
             _health.Init(currentHp);
-            _sprite.SetFlipX(team == Team.Right);
+            SetSpriteFlipX(team == Team.Right);
         }
         
         public IEnumerator ExecuteAction()
@@ -54,6 +54,16 @@ namespace Logic.Characters
                 Died?.Invoke(this);
                 _isDead = true;
             }
+        }
+
+        public void SetSpriteFlipX(bool flipX)
+        {
+            _sprite.flipX = flipX;
+        }
+
+        public void ResetSpriteFlip()
+        {
+            SetSpriteFlipX(Team == Team.Right);
         }
     }
 }

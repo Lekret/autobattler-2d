@@ -10,7 +10,6 @@ namespace Logic.Actions
     public class KnightAction : CharacterAction
     {
         [SerializeField] private Character _character;
-        [SerializeField] private CharacterSprite _sprite;
         [SerializeField] private Movement _movement;
         [SerializeField] private MeleeAttack _meleeAttack;
         [SerializeField] private Animator _animator;
@@ -29,7 +28,7 @@ namespace Logic.Actions
             yield return _movement.MoveTo(targetPosition + offset);
             yield return _meleeAttack.AttackTarget(_target);
             yield return _movement.MoveTo(initialPosition);
-            _sprite.ResetFlip(_character.Team);
+            _character.ResetSpriteFlip();
             _animator.Play(AnimHashes.Idle);
             _target = null;
         }

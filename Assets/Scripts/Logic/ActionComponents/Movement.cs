@@ -7,7 +7,6 @@ namespace Logic.ActionComponents
     public class Movement : MonoBehaviour
     {
         [SerializeField] private float _approachSpeed = 4;
-        [SerializeField] private CharacterSprite _sprite;
         [SerializeField] private Character _character;
         [SerializeField] private Animator _animator;
         
@@ -19,7 +18,7 @@ namespace Logic.ActionComponents
             {
                 var characterPosition = characterTransform.position;
                 var diff = targetPosition.x - characterPosition.x;
-                _sprite.SetFlipX(diff < 0);
+                _character.SetSpriteFlipX(diff < 0);
                 characterTransform.position = Vector3.MoveTowards(
                     characterPosition,
                     targetPosition,
