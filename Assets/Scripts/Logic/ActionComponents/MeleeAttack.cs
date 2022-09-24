@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using Logic.Characters;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Logic.ActionComponents
@@ -7,27 +7,26 @@ namespace Logic.ActionComponents
     public class MeleeAttack : MonoBehaviour, IAnimatorListener
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private DamageDealer _damageDealer;
 
-        private Character _target;
+        private Action _applyDamage;
         
-        public IEnumerator AttackTarget(Character opponent)
+        public IEnumerator Attack(Action applyDamage)
         {
-            _target = opponent;
+            _applyDamage = applyDamage;
             _animator.Play(AnimHashes.Attack);
             yield return new WaitUntil(() =>
             {
                 var state = _animator.GetCurrentAnimatorStateInfo(0);
                 return state.shortNameHash == AnimHashes.Attack && state.normalizedTime >= 1;
             });
-            _target = null;
+            _applyDamage = null;
         }
 
         public void OnStateTriggered(int hash)
         {
-            if (hash == AnimHashes.Attack && _target != null)
+            if (hash == AnimHashes.Attack)
             {
-                _damageDealer.ApplyDamage(_target);
+                _applyDamage?.Invoke();
             }
         }
     }

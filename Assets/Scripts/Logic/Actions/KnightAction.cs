@@ -12,6 +12,7 @@ namespace Logic.Actions
         [SerializeField] private Character _character;
         [SerializeField] private Movement _movement;
         [SerializeField] private MeleeAttack _meleeAttack;
+        [SerializeField] private DamageDealer _damageDealer;
         [SerializeField] private Animator _animator;
 
         [Inject] private IAliveCharacters _characters;
@@ -26,11 +27,16 @@ namespace Logic.Actions
             var targetPosition = _target.transform.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
-            yield return _meleeAttack.AttackTarget(_target);
+            yield return _meleeAttack.Attack(ApplyDamage);
             yield return _movement.MoveTo(initialPosition);
             _character.ResetSpriteFlip();
             _animator.Play(AnimHashes.Idle);
             _target = null;
+        }
+
+        private void ApplyDamage()
+        {
+            _damageDealer.ApplyDamage(_target);
         }
 
         private Character GetTarget()

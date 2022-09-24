@@ -247,6 +247,7 @@ MonoBehaviour:
   _character: {fileID: 157411113415974065}
   _movement: {fileID: 389440101586184029}
   _meleeAttack: {fileID: 8112053291854422964}
+  _damageDealer: {fileID: 9107190235604297482}
   _animator: {fileID: 3779025896561824426}
 --- !u!114 &389440101586184029
 MonoBehaviour:
@@ -276,7 +277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3779025896561824426}
-  _damageDealer: {fileID: 9107190235604297482}
 --- !u!114 &9107190235604297482
 MonoBehaviour:
   m_ObjectHideFlags: 0
