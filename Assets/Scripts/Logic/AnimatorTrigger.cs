@@ -17,19 +17,10 @@ namespace Logic
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (!_triggered && stateInfo.normalizedTime > _normalizedTime)
-            {
-                // Trigger(stateInfo);
-                // _triggered = true;
-            }
-        }
-
-        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            if (!_triggered)
-            {
+            { 
                 Trigger(stateInfo);
+                _triggered = true;
             }
-            _triggered = false;
         }
 
         private void Trigger(AnimatorStateInfo stateInfo)
