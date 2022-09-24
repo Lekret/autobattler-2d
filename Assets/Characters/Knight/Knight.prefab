@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2461994971326874321}
   - component: {fileID: 389440101586184029}
   - component: {fileID: 8112053291854422964}
+  - component: {fileID: 9107190235604297482}
   m_Layer: 0
   m_Name: Action
   m_TagString: Untagged
@@ -290,5 +291,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9070fdf43b2c444193fdba3306aea19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 15
   _animator: {fileID: 3779025896561824426}
+  _damageDealer: {fileID: 9107190235604297482}
+--- !u!114 &9107190235604297482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717753040657842021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670c3541225b483fb1d663abeb54acef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageMin: 15
+  _damageMax: 33

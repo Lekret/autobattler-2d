@@ -18,26 +18,26 @@ namespace Logic.Actions
         [Inject] private IAliveCharacters _characters;
         [Inject] private IRandomizer _randomizer;
         
-        private Character _opponent;
+        private Character _target;
         
         public override IEnumerator Execute()
         {
-            _opponent = GetOpponent();
+            _target = GetTarget();
             var initialPosition = _character.transform.position;
-            var opponentPosition = _opponent.transform.position;
-            var offset = (initialPosition - opponentPosition).normalized;
-            yield return _movement.MoveTo(opponentPosition + offset);
-            yield return _meleeAttack.AttackOpponent(_opponent);
+            var targetPosition = _target.transform.position;
+            var offset = (initialPosition - targetPosition).normalized;
+            yield return _movement.MoveTo(targetPosition + offset);
+            yield return _meleeAttack.AttackTarget(_target);
             yield return _movement.MoveTo(initialPosition);
             _sprite.ResetFlip(_character.Team);
             _animator.Play(AnimHashes.Idle);
-            _opponent = null;
+            _target = null;
         }
 
-        private Character GetOpponent()
+        private Character GetTarget()
         {
-            var oppositeCharacters = _characters.GetByTeam(_character.Team.Opposite());
-            return _randomizer.GetRandom(oppositeCharacters);
+            var targetCharacters = _characters.GetByTeam(_character.Team.Opposite());
+            return _randomizer.GetRandom(targetCharacters);
         }
     }
 }
