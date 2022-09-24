@@ -30,6 +30,16 @@ namespace Logic.Characters
             return _action.Execute();
         }
         
+        public void SetSpriteFlipX(bool flipX)
+        {
+            _sprite.flipX = flipX;
+        }
+
+        public void ResetSpriteFlip()
+        {
+            SetSpriteFlipX(Team == Team.Right);
+        }
+        
         private void Awake()
         {
             _health.Changed += OnHealthChanged;
@@ -54,16 +64,6 @@ namespace Logic.Characters
                 Died?.Invoke(this);
                 _isDead = true;
             }
-        }
-
-        public void SetSpriteFlipX(bool flipX)
-        {
-            _sprite.flipX = flipX;
-        }
-
-        public void ResetSpriteFlip()
-        {
-            SetSpriteFlipX(Team == Team.Right);
         }
     }
 }
