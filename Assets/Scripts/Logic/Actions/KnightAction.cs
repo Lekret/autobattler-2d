@@ -22,15 +22,22 @@ namespace Logic.Actions
         
         public override IEnumerator Execute()
         {
+            _opponent = GetOpponent();
             var initialPosition = _character.transform.position;
-            var oppositeCharacters = _characters.GetByTeam(_character.Team.Opposite());
-            _opponent = _randomizer.GetRandom(oppositeCharacters);
-            yield return _movement.MoveTo(_opponent.transform.position);
+            var opponentPosition = _opponent.transform.position;
+            var offset = (initialPosition - opponentPosition).normalized;
+            yield return _movement.MoveTo(opponentPosition + offset);
             yield return _meleeAttack.AttackOpponent(_opponent);
             yield return _movement.MoveTo(initialPosition);
             _sprite.ResetFlip(_character.Team);
             _animator.Play(AnimHashes.Idle);
             _opponent = null;
+        }
+
+        private Character GetOpponent()
+        {
+            var oppositeCharacters = _characters.GetByTeam(_character.Team.Opposite());
+            return _randomizer.GetRandom(oppositeCharacters);
         }
     }
 }
