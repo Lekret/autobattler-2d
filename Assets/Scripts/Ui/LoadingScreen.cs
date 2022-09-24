@@ -8,8 +8,8 @@ namespace Ui
 {
     public class LoadingScreen : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private TextMeshProUGUI _progress;
+        public CanvasGroup CanvasGroup;
+        public TextMeshProUGUI Progress;
         [Inject] private ISceneLoader _sceneLoader;
 
         private void Awake()
@@ -26,13 +26,13 @@ namespace Ui
 
         private void SetProgress(float progress)
         {
-            _canvasGroup.alpha = 1;
-            _progress.text = $"{progress * 100}%";
+            CanvasGroup.alpha = 1;
+            Progress.text = $"{progress * 100}%";
         }
         
         private void Hide()
         {
-            _canvasGroup.alpha = 0;
+            CanvasGroup.alpha = 0;
         }
     }
 }

@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7eaf9dbc82f4779a157a78ffe514e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 676048173438552949}
-  _progress: {fileID: 1948234809330291041}
+  CanvasGroup: {fileID: 676048173438552949}
+  Progress: {fileID: 1948234809330291041}
 --- !u!223 &1948234809135036854
 Canvas:
   m_ObjectHideFlags: 0
