@@ -13,8 +13,8 @@ namespace Logic.GameStates
         private readonly IAliveCharacters _aliveCharacters;
         private readonly IRandomizer _randomizer;
         private readonly ICoroutineRunner _coroutineRunner;
-        private Coroutine _battleRoutine;
         private Team _currentTeam = Team.Left;
+        private bool _battleIsRunning;
 
         public BattleState(
             IGameStateMachine stateMachine, 
@@ -35,12 +35,13 @@ namespace Logic.GameStates
                 character.Died += OnCharacterDied;
             }
 
-            _battleRoutine = _coroutineRunner.StartCoroutine(RunBattle());
+            _battleIsRunning = true;
+            _coroutineRunner.StartCoroutine(RunBattle());
         }
 
         private IEnumerator RunBattle()
         {
-            while (true)
+            while (_battleIsRunning)
             {
                 var characters = _aliveCharacters.GetByTeam(_currentTeam);
                 var character = _randomizer.GetRandom(characters);
@@ -63,7 +64,7 @@ namespace Logic.GameStates
             var winnersTeam = GetWinnersTeam();
             if (winnersTeam.HasValue)
             {
-                _coroutineRunner.StopCoroutine(_battleRoutine);
+                _battleIsRunning = false;
                 _stateMachine.Enter<ResultState, Team>(winnersTeam.Value);
             }
         }
