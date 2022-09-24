@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace Logic.Characters
 {
-    [RequireComponent(typeof(CharacterHealth))]
     public class Character : MonoBehaviour
     {
         [SerializeField] private CharacterAbility _ability;
+        [SerializeField] private CharacterHealth _health;
         [SerializeField] private CharacterSprite _sprite;
 
-        private CharacterHealth _health;
         private bool _isDead;
 
         public IHealth Health => _health;
@@ -33,8 +32,7 @@ namespace Logic.Characters
         
         private void Awake()
         {
-            _health = GetComponent<CharacterHealth>();
-            Health.Changed += OnHealthChanged;
+            _health.Changed += OnHealthChanged;
         }
 
         private void OnDestroy()

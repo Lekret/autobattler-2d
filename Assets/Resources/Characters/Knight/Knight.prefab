@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ability: {fileID: 4531456089324449786}
   _sprite: {fileID: 215261234129668638}
+  _health: {fileID: 6775804260796347849}
 --- !u!114 &215261234129668638
 MonoBehaviour:
   m_ObjectHideFlags: 0
