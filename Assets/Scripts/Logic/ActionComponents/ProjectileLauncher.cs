@@ -7,6 +7,7 @@ namespace Logic.ActionComponents
     public class ProjectileLauncher : MonoBehaviour
     {
         [SerializeField] private float _projectileSpeed;
+        [SerializeField] private Transform _spawnPoint;
         [SerializeField] private GameObject _projectilePrefab;
         [Inject] private IInstantiator _instantiator;
 
@@ -14,9 +15,7 @@ namespace Logic.ActionComponents
         {
             var projectile = _instantiator.InstantiatePrefab(_projectilePrefab);
             var projectileTransform = projectile.transform;
-            var targetDirection = targetPosition - projectileTransform.position;
-            var angle = Vector3.SignedAngle(Vector3.right, targetDirection, Vector3.forward);
-            projectileTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            SetPositionAndRotation(projectileTransform, targetPosition);
             while ((projectileTransform.position - targetPosition).sqrMagnitude > Vector3.kEpsilon)
             {
                 projectileTransform.position = Vector3.MoveTowards(
@@ -26,6 +25,14 @@ namespace Logic.ActionComponents
                 yield return null;
             }
             Destroy(projectile);
+        }
+
+        private void SetPositionAndRotation(Transform projectileTransform, Vector3 targetPosition)
+        {
+            projectileTransform.position = _spawnPoint.position;
+            var targetDirection = targetPosition - projectileTransform.position;
+            var angle = Vector3.SignedAngle(Vector3.right, targetDirection, Vector3.forward);
+            projectileTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 }
