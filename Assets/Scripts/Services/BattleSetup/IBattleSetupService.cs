@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StaticData;
 
-namespace Services.BattleSetupService
+namespace Services.BattleSetup
 {
     public interface IBattleSetupService
     {

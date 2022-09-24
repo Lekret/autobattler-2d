@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Infrastructure.States;
 using Logic.Characters;
-using Services.BattleSetupService;
+using Services.BattleSetup;
 using StaticData;
 using UnityEngine;
 using Utils;

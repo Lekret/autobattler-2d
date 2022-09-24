@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using StaticData;
 using UnityEngine;
 
-namespace Services.BattleSetupService
+namespace Services.BattleSetup
 {
     public class BattleSetupService : IBattleSetupService
     {

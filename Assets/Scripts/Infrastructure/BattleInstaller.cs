@@ -2,7 +2,8 @@
 using Logic;
 using Logic.Characters;
 using Logic.GameStates;
-using Services.BattleSetupService;
+using Services.BattleSetup;
+using Services.CharacterSelector;
 using Zenject;
 
 namespace Infrastructure
@@ -18,6 +19,7 @@ namespace Infrastructure
             Container.BindInterfacesTo<CharacterFactory>().AsSingle();
             Container.BindInterfacesTo<AliveCharacters>().AsSingle();
             Container.BindInterfacesTo<BattleSetupService>().AsSingle();
+            Container.BindInterfacesTo<CharacterSelector>().AsSingle();
         }
 
         private void BindGameStates()
