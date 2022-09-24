@@ -7,6 +7,7 @@ namespace StaticData
     public class CharacterStaticData : ScriptableObject
     {
         public string Id;
+        public string Name;
         public int Hp;
         public Character Prefab;
     }

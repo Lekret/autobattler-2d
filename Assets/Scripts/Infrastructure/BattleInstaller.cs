@@ -21,7 +21,10 @@ namespace Infrastructure
         private void BindGameStates()
         {
             Container.BindInterfacesTo<GameStateMachine>().AsSingle()
-                .OnInstantiated<GameStateMachine>((_, gsm) => gsm.Enter<SetupState>());
+                .OnInstantiated<GameStateMachine>((_, gsm) =>
+                {
+                    gsm.Enter<SetupState>();
+                });
             Container.BindInterfacesAndSelfTo<SetupState>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleState>().AsSingle();
             Container.BindInterfacesAndSelfTo<ResultState>().AsSingle();

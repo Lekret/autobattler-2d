@@ -2,7 +2,7 @@
 
 namespace Logic
 {
-    public class AnimatorTriggerBehaviour : StateMachineBehaviour
+    public class AnimatorTrigger : StateMachineBehaviour
     {
         [SerializeField] [Range(0, 1)] private float _normalizedTime;
 

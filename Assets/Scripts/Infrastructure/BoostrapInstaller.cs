@@ -1,7 +1,8 @@
-﻿using Logic.Characters;
-using Services.CoroutineRunner;
+﻿using Services.CoroutineRunner;
+using Services.GameMode;
 using Services.Randomizer;
 using Services.SceneLoader;
+using Services.StaticData;
 using StaticData;
 using Zenject;
 using Ui;
@@ -19,9 +20,10 @@ namespace Infrastructure
         {
             Container.BindInterfacesTo<SceneLoader>().AsSingle();
             Container.BindInterfacesTo<Randomizer>().AsSingle();
+            Container.BindInterfacesTo<GameModeService>().AsSingle();
             Container.BindInterfacesTo<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesTo<EntryPoint>().AsSingle().WithArguments(LoadingScreenPrefab);
-            Container.BindInstances(CharacterStaticData);
+            Container.BindInterfacesTo<StaticDataService>().AsSingle().WithArguments(CharacterStaticData);
         }
 
         private class EntryPoint : IInitializable
