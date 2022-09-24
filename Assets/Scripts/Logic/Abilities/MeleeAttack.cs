@@ -21,11 +21,6 @@ namespace Logic.Abilities
         private static readonly int AttackHash = Animator.StringToHash("Attack");
         private Character _opponent;
 
-        private void Awake()
-        {
-            _animator.Play(IdleHash);
-        }
-        
         public void OnStateTriggered(int hash)
         {
             if (hash == AttackHash && _opponent != null)
