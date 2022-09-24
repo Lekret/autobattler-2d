@@ -17,6 +17,7 @@ namespace Logic.Characters
         public IHealth Health => _health;
         public Team Team { get; private set; }
         public event Action<Character> Died;
+        public event Action Hit;
 
         public void Init(Team team, int currentHp)
         {
@@ -43,15 +44,18 @@ namespace Logic.Characters
 
         private void OnHealthChanged()
         {
-            if (!_isDead && _health.Hp <= 0)
+            if (_isDead)
+                return;
+            
+            if (_health.Hp > 0)
             {
-                Die();
+                Hit?.Invoke();
             }
-        }
-
-        private void Die()
-        {
-            _isDead = true;
+            else
+            {
+                Died?.Invoke(this);
+                _isDead = true;
+            }
         }
     }
 }

@@ -7,11 +7,12 @@ using Zenject;
 
 namespace Logic.Abilities
 {
-    public class MeleeAttack : CharacterAbility
+    public class MeleeAttack : CharacterAbility, IAnimatorListener
     {
         [SerializeField] private CharacterSprite _sprite;
         [SerializeField] private Animator _animator;
         [SerializeField] private float _approachSpeed;
+        [SerializeField] private int _damage;
 
         [Inject] private IAliveCharacters _characters;
         [Inject] private IRandomizer _randomizer;
@@ -19,28 +20,38 @@ namespace Logic.Abilities
         private static readonly int IdleHash = Animator.StringToHash("Idle");
         private static readonly int MoveHash = Animator.StringToHash("Move");
         private static readonly int AttackHash = Animator.StringToHash("Attack");
+        private Character _opponent;
 
         private void Awake()
         {
             _animator.Play(IdleHash);
+        }
+        
+        public void OnStateTriggered(int hash)
+        {
+            if (hash == AttackHash && _opponent != null)
+            {
+                _opponent.Health.ApplyDamage(_damage);
+            }
         }
 
         public override IEnumerator Execute(Character character)
         {
             var initialPosition = character.transform.position;
             var oppositeCharacters = _characters.GetByTeam(character.Team.Opposite());
-            var opponent = _randomizer.GetRandom(oppositeCharacters);
-            yield return ApproachOpponent(character, opponent);
-            yield return AttackOpponent(opponent);
+            _opponent = _randomizer.GetRandom(oppositeCharacters);
+            yield return ApproachOpponent(character);
+            yield return AttackOpponent();
             yield return ReturnBack(character, initialPosition);
+            _opponent = null;
         }
         
-        private IEnumerator ApproachOpponent(Character character, Character opponent)
+        private IEnumerator ApproachOpponent(Character character)
         {
-            yield return MoveTo(character, opponent.transform.position);
+            yield return MoveTo(character, _opponent.transform.position);
         }
 
-        private IEnumerator AttackOpponent(Character opponent)
+        private IEnumerator AttackOpponent()
         {
             _animator.Play(AttackHash);
             yield return new WaitUntil(() =>

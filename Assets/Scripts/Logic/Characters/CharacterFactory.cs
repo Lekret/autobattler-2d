@@ -23,7 +23,18 @@ namespace Logic.Characters
             var character = _instantiator.InstantiatePrefabForComponent<Character>(data.Prefab);
             character.Init(team, data.Hp);
             character.transform.position = position;
+            SetAnimatorListener(character);
             return character;
+        }
+
+        private static void SetAnimatorListener(Character character)
+        {
+            var listener = character.GetComponentInChildren<IAnimatorListener>();
+            var behaviours = character.GetComponentInChildren<Animator>().GetBehaviours<AnimatorTriggerBehaviour>();
+            foreach (var behaviour in behaviours)
+            {
+                behaviour.SetListener(listener);
+            }
         }
     }
 }
