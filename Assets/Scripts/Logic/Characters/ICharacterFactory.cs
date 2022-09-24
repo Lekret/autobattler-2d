@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 
 namespace Logic.Characters
 {
     public interface ICharacterFactory
     {
-        Character Create(string id, Team team, Vector3 position);
+        Character Create(CharacterStaticData data, Team team, Vector3 position);
     }
 }

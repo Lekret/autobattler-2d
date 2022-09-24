@@ -5,7 +5,7 @@ namespace Services.BattleSetupService
 {
     public interface IBattleSetupService
     {
-        public IReadOnlyList<CharacterStaticData> GetLeftTeamData();
-        public IReadOnlyList<CharacterStaticData> GetRightTeamData();
+        public IEnumerable<CharacterStaticData> GetLeftTeamData();
+        public IEnumerable<CharacterStaticData> GetRightTeamData();
     }
 }
