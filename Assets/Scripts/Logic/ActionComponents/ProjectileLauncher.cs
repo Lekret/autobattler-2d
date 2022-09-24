@@ -25,6 +25,7 @@ namespace Logic.ActionComponents
                     _projectileSpeed * Time.deltaTime);
                 yield return null;
             }
+            Destroy(projectile);
         }
     }
 }
