@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Services.Randomizer
 {
@@ -19,6 +19,15 @@ namespace Services.Randomizer
             }
             var rnd = randomizer.Range(0, items.Count);
             return items[rnd];
+        }
+        
+        public static void Shuffle<T>(this IRandomizer randomizer, IList<T> list)
+        {
+            for (var i = list.Count - 1; i > 0; i--)
+            {
+                var rnd = randomizer.Range(0, i + 1);
+                (list[i], list[rnd]) = (list[rnd], list[i]);
+            }
         }
     }
 }
