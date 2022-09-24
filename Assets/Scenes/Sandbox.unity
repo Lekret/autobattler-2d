@@ -552,8 +552,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftSpawnPoints:
   - {fileID: 1564437438}
+  - {fileID: 72695768}
+  - {fileID: 523504028}
   _rightSpawnPoints:
   - {fileID: 406082503}
+  - {fileID: 330642269}
+  - {fileID: 40832866}
 --- !u!4 &1783057897
 Transform:
   m_ObjectHideFlags: 0
