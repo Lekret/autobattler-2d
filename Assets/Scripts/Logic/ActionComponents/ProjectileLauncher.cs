@@ -29,7 +29,13 @@ namespace Logic.ActionComponents
 
         private void SetPositionAndRotation(Transform projectileTransform, Vector3 targetPosition)
         {
-            projectileTransform.position = _spawnPoint.position;
+            var spawnOffset = _spawnPoint.localPosition;
+            var characterPosition = transform.position;
+            if (targetPosition.x < characterPosition.x)
+            {
+                spawnOffset.x *= -1;
+            }
+            projectileTransform.position = characterPosition + spawnOffset;
             var targetDirection = targetPosition - projectileTransform.position;
             var angle = Vector3.SignedAngle(Vector3.right, targetDirection, Vector3.forward);
             projectileTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
