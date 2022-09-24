@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb4447277be4cb646bc29c178e84aeec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58ae80fcbafaf43409f6c37383ba9a8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &3779025896561824426
 Animator:
   serializedVersion: 4
@@ -259,9 +259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 157411113415974065}
   _sprite: {fileID: 215261234129668638}
-  _animator: {fileID: 3779025896561824426}
   _movement: {fileID: 389440101586184029}
   _meleeAttack: {fileID: 8112053291854422964}
+  _animator: {fileID: 3779025896561824426}
 --- !u!114 &389440101586184029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _approachSpeed: 4
   _sprite: {fileID: 215261234129668638}
-  _animator: {fileID: 3779025896561824426}
   _character: {fileID: 157411113415974065}
+  _animator: {fileID: 3779025896561824426}
 --- !u!114 &8112053291854422964
 MonoBehaviour:
   m_ObjectHideFlags: 0
