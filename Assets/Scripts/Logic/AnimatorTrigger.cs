@@ -18,8 +18,8 @@ namespace Logic
         {
             if (!_triggered && stateInfo.normalizedTime > _normalizedTime)
             {
-                Trigger(stateInfo);
-                _triggered = true;
+                // Trigger(stateInfo);
+                // _triggered = true;
             }
         }
 

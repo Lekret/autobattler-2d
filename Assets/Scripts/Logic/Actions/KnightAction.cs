@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Logic.ActionComponents;
 using Logic.Characters;
 using Services.Randomizer;
@@ -11,7 +12,7 @@ namespace Logic.Actions
     {
         [SerializeField] private Character _character;
         [SerializeField] private Movement _movement;
-        [SerializeField] private MeleeAttack _meleeAttack;
+        [SerializeField] private AnimatorListener _animatorListener;
         [SerializeField] private DamageDealer _damageDealer;
         [SerializeField] private Animator _animator;
 
@@ -19,7 +20,7 @@ namespace Logic.Actions
         [Inject] private IRandomizer _randomizer;
         
         private Character _target;
-        
+
         public override IEnumerator Execute()
         {
             _target = GetTarget();
@@ -27,7 +28,7 @@ namespace Logic.Actions
             var targetPosition = _target.transform.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
-            yield return _meleeAttack.Attack(ApplyDamage);
+            yield return _animatorListener.WaitFor(AnimHashes.Attack, ApplyDamage);
             yield return _movement.MoveTo(initialPosition);
             _character.ResetSpriteFlip();
             _animator.Play(AnimHashes.Idle);
