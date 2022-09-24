@@ -29,11 +29,11 @@ namespace Logic.Characters
 
         private static void SetAnimatorListener(Character character)
         {
-            var listener = character.GetComponentInChildren<IAnimatorListener>();
+            var listener = character.GetComponentsInChildren<IAnimatorListener>();
             var behaviours = character.GetComponentInChildren<Animator>().GetBehaviours<AnimatorTriggerBehaviour>();
             foreach (var behaviour in behaviours)
             {
-                behaviour.SetListener(listener);
+                behaviour.SetListeners(listener);
             }
         }
     }

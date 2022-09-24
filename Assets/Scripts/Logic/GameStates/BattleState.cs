@@ -45,7 +45,7 @@ namespace Logic.GameStates
             {
                 var characters = _aliveCharacters.GetByTeam(_currentTeam);
                 var character = _randomizer.GetRandom(characters);
-                yield return character.ExecuteAbility();
+                yield return character.ExecuteAction();
                 _currentTeam = _currentTeam.Opposite();
             }
         }

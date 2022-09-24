@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections;
-using Logic.Abilities;
+﻿using System.Collections;
 using UnityEngine;
+using System;
+using Logic.Actions;
 
 namespace Logic.Characters
 {
     public class Character : MonoBehaviour
     {
-        [SerializeField] private CharacterAbility _ability;
+        [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private CharacterSprite _sprite;
 
@@ -25,9 +25,9 @@ namespace Logic.Characters
             _sprite.SetFlipX(team == Team.Right);
         }
         
-        public IEnumerator ExecuteAbility()
+        public IEnumerator ExecuteAction()
         {
-            return _ability.Execute(this);
+            return _action.Execute();
         }
         
         private void Awake()

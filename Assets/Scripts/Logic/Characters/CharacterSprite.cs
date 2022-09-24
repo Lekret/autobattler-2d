@@ -10,5 +10,10 @@ namespace Logic.Characters
         {
             _spriteRenderer.flipX = flipX;
         }
+
+        public void ResetFlip(Team team)
+        {
+            SetFlipX(team == Team.Right);
+        }
     }
 }

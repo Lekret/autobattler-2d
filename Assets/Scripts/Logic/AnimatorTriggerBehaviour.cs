@@ -6,12 +6,12 @@ namespace Logic
     {
         [SerializeField] [Range(0, 1)] private float _normalizedTime;
 
-        private IAnimatorListener _listener;
+        private IAnimatorListener[] _listeners;
         private bool _triggered;
         
-        public void SetListener(IAnimatorListener listener)
+        public void SetListeners(IAnimatorListener[] listeners)
         {
-            _listener = listener;
+            _listeners = listeners;
         }
         
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -34,9 +34,9 @@ namespace Logic
 
         private void Trigger(AnimatorStateInfo stateInfo)
         {
-            if (_listener != null)
+            foreach (var listener in _listeners)
             {
-                _listener.OnStateTriggered(stateInfo.shortNameHash);
+                listener.OnStateTriggered(stateInfo.shortNameHash);
             }
         }
     }
