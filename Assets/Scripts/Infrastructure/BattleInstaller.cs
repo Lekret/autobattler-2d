@@ -2,6 +2,7 @@
 using Logic;
 using Logic.Characters;
 using Logic.GameStates;
+using Services.BattleSetupService;
 using Zenject;
 
 namespace Infrastructure
@@ -16,6 +17,7 @@ namespace Infrastructure
             Container.Bind<SpawnPoints>().FromInstance(SpawnPoints).AsSingle();
             Container.BindInterfacesTo<CharacterFactory>().AsSingle();
             Container.BindInterfacesTo<AliveCharacters>().AsSingle();
+            Container.BindInterfacesTo<BattleSetupService>().AsSingle();
         }
 
         private void BindGameStates()
