@@ -2,6 +2,7 @@
 using System.Collections;
 using Logic.ActionComponents;
 using Logic.Characters;
+using Services.CharacterSelector;
 using Services.Randomizer;
 using UnityEngine;
 using Zenject;
@@ -12,23 +13,22 @@ namespace Logic.Actions
     {
         [SerializeField] private Character _character;
         [SerializeField] private Movement _movement;
-        [SerializeField] private AnimatorListener _animatorListener;
+        [SerializeField] private AwaitableAnimation _awaitableAnimation;
         [SerializeField] private DamageDealer _damageDealer;
         [SerializeField] private Animator _animator;
 
-        [Inject] private IAliveCharacters _characters;
-        [Inject] private IRandomizer _randomizer;
+        [Inject] private ICharacterSelector _characterSelector;
         
         private Character _target;
 
         public override IEnumerator Execute()
         {
-            _target = GetTarget();
+            _target = _characterSelector.GetSingle(_character.Team.Opposite());
             var initialPosition = _character.transform.position;
             var targetPosition = _target.transform.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
-            yield return _animatorListener.WaitFor(AnimHashes.Attack, ApplyDamage);
+            yield return _awaitableAnimation.Play(AnimHashes.Attack, ApplyDamage);
             yield return _movement.MoveTo(initialPosition);
             _character.ResetSpriteFlip();
             _animator.Play(AnimHashes.Idle);
@@ -38,12 +38,6 @@ namespace Logic.Actions
         private void ApplyDamage()
         {
             _damageDealer.ApplyDamage(_target);
-        }
-
-        private Character GetTarget()
-        {
-            var targetCharacters = _characters.GetByTeam(_character.Team.Opposite());
-            return _randomizer.GetRandom(targetCharacters);
         }
     }
 }

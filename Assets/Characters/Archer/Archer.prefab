@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: -155446026217231232}
   - component: {fileID: 27496356729429052}
   m_Layer: 0
-  m_Name: Knight
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22dbf0134164bc5b36aca0bc8262332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action: {fileID: 2461994971326874321}
+  _action: {fileID: 4461054979813735561}
   _health: {fileID: 6775804260796347849}
   _sprite: {fileID: 2552145885572122142}
 --- !u!114 &6775804260796347849
@@ -206,10 +206,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8229310583107618433}
-  - component: {fileID: 2461994971326874321}
-  - component: {fileID: 8112053291854422964}
-  - component: {fileID: 389440101586184029}
+  - component: {fileID: 4461054979813735561}
+  - component: {fileID: 5671521267144717380}
   - component: {fileID: 9107190235604297482}
+  - component: {fileID: 5629419117650409208}
   m_Layer: 0
   m_Name: Action
   m_TagString: Untagged
@@ -232,7 +232,7 @@ Transform:
   m_Father: {fileID: 2285158692861818677}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2461994971326874321
+--- !u!114 &4461054979813735561
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,15 +241,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5717753040657842021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4a06726c1040ccaa72fe8517e98d78, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c9060bfe244fe9b44cc495af8955dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 157411113415974065}
-  _movement: {fileID: 389440101586184029}
-  _awaitableAnimation: {fileID: 8112053291854422964}
+  _projectileLauncher: {fileID: 5629419117650409208}
+  _awaitableAnimation: {fileID: 5671521267144717380}
   _damageDealer: {fileID: 9107190235604297482}
   _animator: {fileID: 3779025896561824426}
---- !u!114 &8112053291854422964
+--- !u!114 &5671521267144717380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,21 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9070fdf43b2c444193fdba3306aea19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3779025896561824426}
---- !u!114 &389440101586184029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717753040657842021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae6fe3f89374c6691b3d4850aa4d3a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _approachSpeed: 4
-  _character: {fileID: 157411113415974065}
   _animator: {fileID: 3779025896561824426}
 --- !u!114 &9107190235604297482
 MonoBehaviour:
@@ -289,5 +274,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670c3541225b483fb1d663abeb54acef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageMin: 15
-  _damageMax: 33
+  _damageMin: 10
+  _damageMax: 20
+--- !u!114 &5629419117650409208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717753040657842021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d6d334faaf4c4db86160674b9066c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectileSpeed: 12
+  _projectilePrefab: {fileID: 2900804235142681230, guid: 05550ce2896d1a041babf4f0bab83e6a, type: 3}
