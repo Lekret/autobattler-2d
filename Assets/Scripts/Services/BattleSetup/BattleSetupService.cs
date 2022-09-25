@@ -9,12 +9,12 @@ namespace Services.BattleSetup
         private static TestCharacterData TestData => 
             Resources.Load<TestCharacterData>("StaticData/TestCharacterData");
 
-        public IEnumerable<CharacterStaticData> GetLeftTeamData()
+        public IReadOnlyList<CharacterStaticData> GetLeftTeamData()
         {
             return TestData.Left;
         }
 
-        public IEnumerable<CharacterStaticData> GetRightTeamData()
+        public IReadOnlyList<CharacterStaticData> GetRightTeamData()
         {
             return TestData.Right;
         }

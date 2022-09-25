@@ -6,7 +6,6 @@ using Services.AssetsManagement;
 using Services.BattleSetup;
 using StaticData;
 using UnityEngine;
-using Utils;
 
 namespace Logic.GameStates
 {
@@ -39,12 +38,12 @@ namespace Logic.GameStates
         {
             await SpawnCharactersAsync(
                 Team.Left,
-                _battleSetupService.GetLeftTeamData().ToQueue(),
-                _spawnPoints.LeftSpawnPoints.ToQueue());
+                _battleSetupService.GetLeftTeamData(),
+                _spawnPoints.LeftSpawnPoints);
             await SpawnCharactersAsync(
                 Team.Right,
-                _battleSetupService.GetRightTeamData().ToQueue(), 
-                _spawnPoints.RightSpawnPoints.ToQueue());
+                _battleSetupService.GetRightTeamData(), 
+                _spawnPoints.RightSpawnPoints);
             
             _assetProvider.Cleanup();
             _stateMachine.Enter<BattleState>();
@@ -52,19 +51,17 @@ namespace Logic.GameStates
 
         private async Task SpawnCharactersAsync(
             Team team,
-            Queue<CharacterStaticData> characterData, 
-            Queue<Transform> spawnPoints)
+            IReadOnlyList<CharacterStaticData> characterData, 
+            IReadOnlyList<Transform> spawnPoints)
         {
             if (characterData.Count > spawnPoints.Count)
             {
                 Debug.LogError("Not enough spawn points!");
             }
 
-            while (characterData.Count > 0 && spawnPoints.Count > 0)
+            for (var i = 0; i < characterData.Count && i < spawnPoints.Count; i++)
             {
-                var data = characterData.Dequeue();
-                var spawnPoint = spawnPoints.Dequeue();
-                var character = await _characterFactory.CreateAsync(data, team, spawnPoint.position);
+                var character = await _characterFactory.CreateAsync(characterData[i], team, spawnPoints[i].position);
                 _aliveCharacters.Add(character);
             }
         }
