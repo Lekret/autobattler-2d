@@ -17,11 +17,5 @@ namespace Services.StaticData
         {
             return _characterStaticData.Values;
         }
-
-        // TODO DELETE MAYBE???
-        public CharacterStaticData GetById(string characterId)
-        {
-            return _characterStaticData[characterId];
-        }
     }
 }
