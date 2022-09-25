@@ -6,6 +6,6 @@ namespace Logic.Characters
 {
     public interface ICharacterFactory
     {
-        Task<Character> Create(CharacterStaticData data, Team team, Vector2 position);
+        Task<Character> CreateAsync(CharacterStaticData data, Team team, Vector2 position);
     }
 }

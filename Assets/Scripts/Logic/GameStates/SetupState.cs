@@ -37,11 +37,11 @@ namespace Logic.GameStates
 
         public async void Enter()
         {
-            await SpawnCharacters(
+            await SpawnCharactersAsync(
                 Team.Left,
                 _battleSetupService.GetLeftTeamData().ToQueue(),
                 _spawnPoints.LeftSpawnPoints.ToQueue());
-            await SpawnCharacters(
+            await SpawnCharactersAsync(
                 Team.Right,
                 _battleSetupService.GetRightTeamData().ToQueue(), 
                 _spawnPoints.RightSpawnPoints.ToQueue());
@@ -50,7 +50,7 @@ namespace Logic.GameStates
             _stateMachine.Enter<BattleState>();
         }
 
-        private async Task SpawnCharacters(
+        private async Task SpawnCharactersAsync(
             Team team,
             Queue<CharacterStaticData> characterData, 
             Queue<Transform> spawnPoints)
@@ -64,7 +64,7 @@ namespace Logic.GameStates
             {
                 var data = characterData.Dequeue();
                 var spawnPoint = spawnPoints.Dequeue();
-                var character = await _characterFactory.Create(data, team, spawnPoint.position);
+                var character = await _characterFactory.CreateAsync(data, team, spawnPoint.position);
                 _aliveCharacters.Add(character);
             }
         }
