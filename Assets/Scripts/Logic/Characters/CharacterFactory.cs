@@ -9,17 +9,17 @@ namespace Logic.Characters
     public class CharacterFactory : ICharacterFactory
     {
         private readonly IInstantiator _instantiator;
-        private readonly IAssets _assets;
+        private readonly IAssetProvider _assetProvider;
 
-        public CharacterFactory(IInstantiator instantiator, IAssets assets)
+        public CharacterFactory(IInstantiator instantiator, IAssetProvider assetProvider)
         {
             _instantiator = instantiator;
-            _assets = assets;
+            _assetProvider = assetProvider;
         }
         
         public async Task<Character> Create(CharacterStaticData data, Team team, Vector3 position)
         {
-            var prefab = await _assets.Load<GameObject>(data.PrefabReference);
+            var prefab = await _assetProvider.Load<GameObject>(data.PrefabReference);
             var character = _instantiator.InstantiatePrefabForComponent<Character>(prefab);
             character.Init(team, data.Hp);
             character.transform.position = position;

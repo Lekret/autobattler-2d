@@ -16,7 +16,7 @@ namespace Logic.GameStates
         private readonly ICharacterFactory _characterFactory;
         private readonly IAliveCharacters _aliveCharacters;
         private readonly IBattleSetupService _battleSetupService;
-        private readonly IAssets _assets;
+        private readonly IAssetProvider _assetProvider;
         private readonly SpawnPoints _spawnPoints;
 
         public SetupState(
@@ -24,14 +24,14 @@ namespace Logic.GameStates
             ICharacterFactory characterFactory, 
             IAliveCharacters aliveCharacters,
             IBattleSetupService battleSetupService,
-            IAssets assets,
+            IAssetProvider assetProvider,
             SpawnPoints spawnPoints)
         {
             _stateMachine = stateMachine;
             _characterFactory = characterFactory;
             _aliveCharacters = aliveCharacters;
             _battleSetupService = battleSetupService;
-            _assets = assets;
+            _assetProvider = assetProvider;
             _spawnPoints = spawnPoints;
         }
 
@@ -46,7 +46,7 @@ namespace Logic.GameStates
                 _battleSetupService.GetRightTeamData().ToQueue(), 
                 _spawnPoints.RightSpawnPoints.ToQueue());
             
-            _assets.Cleanup();
+            _assetProvider.Cleanup();
             _stateMachine.Enter<BattleState>();
         }
 
