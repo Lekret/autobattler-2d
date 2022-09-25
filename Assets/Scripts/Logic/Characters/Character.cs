@@ -10,6 +10,7 @@ namespace Logic.Characters
         [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private Animator _animator;
 
         private bool _isDead;
 
@@ -27,7 +28,8 @@ namespace Logic.Characters
         
         public IEnumerator ExecuteAction()
         {
-            return _action.Execute();
+            yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AnimHashes.Idle);
+            yield return _action.Execute();
         }
         
         public void SetSpriteFlipX(bool flipX)

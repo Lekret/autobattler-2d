@@ -158,6 +158,7 @@ MonoBehaviour:
   _action: {fileID: 4461054979813735561}
   _health: {fileID: 6775804260796347849}
   _sprite: {fileID: 2552145885572122142}
+  _animator: {fileID: 3779025896561824426}
 --- !u!114 &6775804260796347849
 MonoBehaviour:
   m_ObjectHideFlags: 0
