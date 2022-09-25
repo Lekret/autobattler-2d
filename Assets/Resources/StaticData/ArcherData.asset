@@ -15,4 +15,8 @@ MonoBehaviour:
   Id: archer
   Name: Archer
   Hp: 80
-  Prefab: {fileID: 157411113415974065, guid: 40d54a0e1686a654fa5324084c57afbc, type: 3}
+  PrefabReference:
+    m_AssetGUID: 40d54a0e1686a654fa5324084c57afbc
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

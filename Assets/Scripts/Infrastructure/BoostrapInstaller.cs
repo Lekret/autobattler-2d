@@ -1,12 +1,13 @@
-﻿using Services.CoroutineRunner;
+﻿using Services.AssetsManagement;
+using Services.CoroutineRunner;
 using Services.GameMode;
 using Services.Randomizer;
 using Services.SceneLoader;
 using Services.StaticData;
 using StaticData;
-using Zenject;
 using Ui;
 using UnityEngine;
+using Zenject;
 
 namespace Infrastructure
 {
@@ -22,6 +23,7 @@ namespace Infrastructure
             Container.BindInterfacesTo<Randomizer>().AsSingle();
             Container.BindInterfacesTo<GameModeService>().AsSingle();
             Container.BindInterfacesTo<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.BindInterfacesTo<AssetProvider>().AsSingle();
             Container.BindInterfacesTo<EntryPoint>().AsSingle().WithArguments(LoadingScreenPrefab);
             Container.BindInterfacesTo<CharacterDataService>().AsSingle().WithArguments(CharacterStaticData);
         }

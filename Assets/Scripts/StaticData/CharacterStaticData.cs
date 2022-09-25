@@ -1,5 +1,5 @@
-﻿using Logic.Characters;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace StaticData
 {
@@ -9,6 +9,6 @@ namespace StaticData
         public string Id;
         public string Name;
         public int Hp;
-        public Character Prefab;
+        public AssetReferenceGameObject PrefabReference;
     }
 }

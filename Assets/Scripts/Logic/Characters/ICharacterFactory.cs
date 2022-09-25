@@ -1,10 +1,11 @@
-﻿using StaticData;
+﻿using System.Threading.Tasks;
+using StaticData;
 using UnityEngine;
 
 namespace Logic.Characters
 {
     public interface ICharacterFactory
     {
-        Character Create(CharacterStaticData data, Team team, Vector3 position);
+        Task<Character> Create(CharacterStaticData data, Team team, Vector3 position);
     }
 }
