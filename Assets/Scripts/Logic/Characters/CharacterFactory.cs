@@ -17,7 +17,7 @@ namespace Logic.Characters
             _assetProvider = assetProvider;
         }
         
-        public async Task<Character> Create(CharacterStaticData data, Team team, Vector3 position)
+        public async Task<Character> Create(CharacterStaticData data, Team team, Vector2 position)
         {
             var prefab = _assetProvider.LoadAsync<GameObject>(data.PrefabReference);
             var character = _instantiator.InstantiatePrefabForComponent<Character>(await prefab);
