@@ -16,7 +16,7 @@ namespace Logic
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (!_triggered && stateInfo.normalizedTime > _normalizedTime)
+            if (!_triggered && stateInfo.normalizedTime >= _normalizedTime)
             { 
                 Trigger(stateInfo);
                 _triggered = true;
@@ -25,6 +25,10 @@ namespace Logic
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (!_triggered)
+            {
+                Trigger(stateInfo);
+            }
             _triggered = false;
         }
 

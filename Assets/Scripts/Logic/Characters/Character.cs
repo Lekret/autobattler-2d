@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Logic.Actions;
 
 namespace Logic.Characters
@@ -13,6 +15,7 @@ namespace Logic.Characters
         [SerializeField] private Animator _animator;
 
         private bool _isDead;
+        private readonly HashSet<object> _actionBlockers = new HashSet<object>();
 
         public IHealth Health => _health;
         public Team Team { get; private set; }
@@ -26,10 +29,13 @@ namespace Logic.Characters
             SetSpriteFlipX(team == Team.Right);
         }
         
+        public void AddActionBlocker(object blocker) => _actionBlockers.Add(blocker);
+
+        public void RemoveActionBlocker(object blocker) => _actionBlockers.Remove(blocker);
+
         public IEnumerator ExecuteAction()
         {
-            yield return null;
-            yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AnimHashes.Idle);
+            yield return new WaitWhile(() => _actionBlockers.Count > 0);
             yield return _action.Execute();
         }
         
