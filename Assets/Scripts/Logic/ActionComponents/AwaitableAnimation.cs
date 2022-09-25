@@ -8,15 +8,15 @@ namespace Logic.ActionComponents
     {
         [SerializeField] private Animator _animator;
 
-        private Action _onTrigger;
+        private Action _onEnter;
         private bool _triggered;
         private int _hash;
 
-        public IEnumerator Play(int hash, Action onTrigger)
+        public IEnumerator Play(int hash, Action onEnter)
         {
             _triggered = false;
             _hash = hash;
-            _onTrigger = onTrigger;
+            _onEnter = onEnter;
             _animator.Play(_hash);
             yield return new WaitUntil(() =>
             {
@@ -25,14 +25,14 @@ namespace Logic.ActionComponents
                 return state.shortNameHash == _hash &&
                        state.normalizedTime >= 1;
             });
-            _onTrigger = null;
+            _onEnter = null;
         }
 
         public void OnStateEntered(int hash)
         {
             if (hash == _hash)
             {
-                _onTrigger?.Invoke();
+                _onEnter?.Invoke();
                 _triggered = true;
             }
         }
