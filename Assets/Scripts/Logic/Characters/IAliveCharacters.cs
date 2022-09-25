@@ -6,6 +6,6 @@ namespace Logic.Characters
     {
         IReadOnlyList<Character> GetAll();
         IReadOnlyList<Character> GetByTeam(Team team);
-        void Add(Character character);
+        void AddRange(IEnumerable<Character> characters);
     }
 }

@@ -36,22 +36,25 @@ namespace Logic.GameStates
 
         public async void Enter()
         {
-            await SpawnCharactersAsync(
-                Team.Left,
-                _battleSetupService.GetLeftTeamData(),
+            var characterTasks = new List<Task<Character>>();
+            SpawnCharacters(
+                characterTasks, 
+                Team.Left, 
+                _battleSetupService.GetLeftTeamData(), 
                 _spawnPoints.LeftSpawnPoints);
-            await SpawnCharactersAsync(
-                Team.Right,
-                _battleSetupService.GetRightTeamData(), 
+            SpawnCharacters(
+                characterTasks,
+                Team.Right, 
+                _battleSetupService.GetRightTeamData(),
                 _spawnPoints.RightSpawnPoints);
-            
+            var characters = await Task.WhenAll(characterTasks);
+            _aliveCharacters.AddRange(characters);
             _assetProvider.Cleanup();
             _stateMachine.Enter<BattleState>();
         }
 
-        private async Task SpawnCharactersAsync(
-            Team team,
-            IReadOnlyList<CharacterStaticData> characterData, 
+        private void SpawnCharacters(ICollection<Task<Character>> characterTasks, Team team,
+            IReadOnlyList<CharacterStaticData> characterData,
             IReadOnlyList<Transform> spawnPoints)
         {
             if (characterData.Count > spawnPoints.Count)
@@ -61,8 +64,8 @@ namespace Logic.GameStates
 
             for (var i = 0; i < characterData.Count && i < spawnPoints.Count; i++)
             {
-                var character = await _characterFactory.CreateAsync(characterData[i], team, spawnPoints[i].position);
-                _aliveCharacters.Add(character);
+                var characterTask = _characterFactory.CreateAsync(characterData[i], team, spawnPoints[i].position);
+                characterTasks.Add(characterTask);
             }
         }
     }

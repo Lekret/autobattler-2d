@@ -21,11 +21,14 @@ namespace Logic.Characters
             return _charactersByTeam[team];
         }
 
-        public void Add(Character character)
+        public void AddRange(IEnumerable<Character> characters)
         {
-            _characters.Add(character);
-            _charactersByTeam[character.Team].Add(character);
-            character.Died += OnDied;
+            foreach (var character in characters)
+            {
+                _characters.Add(character);
+                _charactersByTeam[character.Team].Add(character);
+                character.Died += OnDied;
+            }
         }
 
         private void OnDied(Character character)
