@@ -33,7 +33,7 @@ namespace Services.AssetsManagement
             {
                 foreach (var handle in resourceHandles)
                 {
-                    // Addressables.Release(handle);
+                    Addressables.Release(handle);
                 }
             }
         }
