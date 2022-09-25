@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4a06726c1040ccaa72fe8517e98d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackDelay: 0.5
   _character: {fileID: 157411113415974065}
   _movement: {fileID: 389440101586184029}
   _awaitableAnimation: {fileID: 8112053291854422964}

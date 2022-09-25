@@ -2,7 +2,7 @@
 
 namespace Logic.Characters
 {
-    public class CharacterHit : MonoBehaviour, IAnimatorListener
+    public class CharacterHit : MonoBehaviour, IAnimatorExitListener
     {
         [SerializeField] private Character _character;
         [SerializeField] private Animator _animator;
@@ -26,9 +26,9 @@ namespace Logic.Characters
             _hitPlayed = true;
         }
 
-        public void OnStateTriggered(int hash)
+        public void OnStateExited(int hash)
         {
-            if (_hitPlayed && hash == AnimHashes.Idle)
+            if (_hitPlayed && hash == AnimHashes.Hit)
             {
                 _character.RemoveActionBlocker(this);
                 _hitPlayed = false;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Logic.ActionComponents
 {
-    public class AwaitableAnimation : MonoBehaviour, IAnimatorListener
+    public class AwaitableAnimation : MonoBehaviour, IAnimatorEnterListener
     {
         [SerializeField] private Animator _animator;
 
@@ -28,7 +28,7 @@ namespace Logic.ActionComponents
             _onTrigger = null;
         }
 
-        void IAnimatorListener.OnStateTriggered(int hash)
+        public void OnStateEntered(int hash)
         {
             if (hash == _hash)
             {

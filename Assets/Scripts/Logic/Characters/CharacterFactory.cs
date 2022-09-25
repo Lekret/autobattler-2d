@@ -24,11 +24,18 @@ namespace Logic.Characters
 
         private static void ConfigureAnimatorListeners(Character character)
         {
-            var listener = character.GetComponentsInChildren<IAnimatorListener>();
-            var behaviours = character.GetComponentInChildren<Animator>().GetBehaviours<AnimatorTrigger>();
-            foreach (var behaviour in behaviours)
+            var enterListeners = character.GetComponentsInChildren<IAnimatorEnterListener>();
+            var enterTriggers = character.GetComponentInChildren<Animator>().GetBehaviours<AnimatorEnterTrigger>();
+            foreach (var behaviour in enterTriggers)
             {
-                behaviour.SetListeners(listener);
+                behaviour.SetListeners(enterListeners);
+            }
+            
+            var exitListeners = character.GetComponentsInChildren<IAnimatorExitListener>();
+            var exitTriggers = character.GetComponentInChildren<Animator>().GetBehaviours<AnimatorExitTrigger>();
+            foreach (var behaviour in exitTriggers)
+            {
+                behaviour.SetListeners(exitListeners);
             }
         }
     }
