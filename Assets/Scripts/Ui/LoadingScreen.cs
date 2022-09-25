@@ -1,5 +1,4 @@
-﻿using System;
-using Services.SceneLoader;
+﻿using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -14,25 +13,31 @@ namespace Ui
 
         private void Awake()
         {
+            _sceneLoader.LoadingStarted += Show;
+            _sceneLoader.LoadingEnded += Hide;
             _sceneLoader.ProgressChanged += SetProgress;
-            _sceneLoader.Loaded += Hide;
         }
-
+        
         private void OnDestroy()
         {
+            _sceneLoader.LoadingStarted += Show;
+            _sceneLoader.LoadingEnded -= Hide;
             _sceneLoader.ProgressChanged -= SetProgress;
-            _sceneLoader.Loaded -= Hide;
         }
 
-        private void SetProgress(float progress)
+        private void Show()
         {
             CanvasGroup.alpha = 1;
-            Progress.text = $"{progress * 100}%";
         }
         
         private void Hide()
         {
             CanvasGroup.alpha = 0;
+        }
+
+        private void SetProgress(float progress)
+        {
+            Progress.text = $"{progress * 100}%";
         }
     }
 }

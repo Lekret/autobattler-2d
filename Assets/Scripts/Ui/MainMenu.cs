@@ -1,7 +1,8 @@
-﻿using Services.GameMode;
+﻿using Services.AssetsManagement;
+using Services.GameMode;
 using Services.SceneLoader;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Ui
@@ -35,7 +36,7 @@ namespace Ui
         private void LaunchSandbox()
         {
             _gameModeService.SetGameMode(GameMode.Sandbox);
-            _sceneLoader.LoadScene("Sandbox");
+            _sceneLoader.LoadSceneAddressable(AssetAddress.SandboxScene);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public static class AssetAddress
     {
-        
+        public const string SandboxScene = "Sandbox";
     }
 }

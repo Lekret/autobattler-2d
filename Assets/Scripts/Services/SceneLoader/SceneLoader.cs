@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using Services.AssetsManagement;
 using Services.CoroutineRunner;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Services.SceneLoader
@@ -8,29 +10,47 @@ namespace Services.SceneLoader
     public class SceneLoader : ISceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly IAssetProvider _assetProvider;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner)
+        public SceneLoader(ICoroutineRunner coroutineRunner, IAssetProvider assetProvider)
         {
             _coroutineRunner = coroutineRunner;
+            _assetProvider = assetProvider;
         }
-        
+
+        public event Action LoadingStarted;
+        public event Action LoadingEnded;
         public event Action<float> ProgressChanged;
-        public event Action Loaded;
 
         public void LoadScene(string sceneName)
         {
-            _coroutineRunner.StartCoroutine(LoadSceneAsync(sceneName));
+            LoadingStarted?.Invoke();
+            var operation = SceneManager.LoadSceneAsync(sceneName);
+            _coroutineRunner.StartCoroutine(TrackProgress(operation));
         }
 
-        private IEnumerator LoadSceneAsync(string sceneName)
+        public void LoadSceneAddressable(string address)
         {
-            var operation = SceneManager.LoadSceneAsync(sceneName);
+            LoadingStarted?.Invoke();
+            _coroutineRunner.StartCoroutine(LoadWithActivation(address));
+        }
+
+        private IEnumerator LoadWithActivation(string address)
+        {
+            var handle = _assetProvider.LoadSceneAsync(address);
+            yield return new WaitUntil(() => handle.IsCompleted);
+            var operation = handle.Result.ActivateAsync();
+            yield return TrackProgress(operation);
+        }
+
+        private IEnumerator TrackProgress(AsyncOperation operation)
+        {
             while (!operation.isDone)
             {
                 ProgressChanged?.Invoke(operation.progress);
                 yield return null;
             }
-            Loaded?.Invoke();
+            LoadingEnded?.Invoke();
         }
     }
 }
