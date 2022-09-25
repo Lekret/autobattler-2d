@@ -12,7 +12,6 @@ namespace Logic.Characters
         [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private SpriteRenderer _sprite;
-        [SerializeField] private Animator _animator;
 
         private bool _isDead;
         private readonly HashSet<object> _actionBlockers = new HashSet<object>();
