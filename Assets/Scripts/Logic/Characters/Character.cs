@@ -28,6 +28,7 @@ namespace Logic.Characters
         
         public IEnumerator ExecuteAction()
         {
+            yield return null;
             yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AnimHashes.Idle);
             yield return _action.Execute();
         }
