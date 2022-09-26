@@ -19,7 +19,7 @@ namespace Logic.Characters
 
         private void OnDied(Character _)
         {
-            _animator.Play("Dead");
+            _animator.Play(AnimHashes.Death);
         }
     }
 }
