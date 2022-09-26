@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Logic.ActionComponents
+namespace Logic.Actions.Components
 {
     public class AwaitableAnimation : MonoBehaviour, IAnimatorEnterListener
     {
@@ -12,7 +12,7 @@ namespace Logic.ActionComponents
         private bool _triggered;
         private int _hash;
 
-        public IEnumerator Play(int hash, Action onEnter)
+        public IEnumerator Play(int hash, Action onEnter = null)
         {
             _triggered = false;
             _hash = hash;

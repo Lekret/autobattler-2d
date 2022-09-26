@@ -3,7 +3,7 @@ using Logic.Characters;
 using UnityEngine;
 using Utils;
 
-namespace Logic.ActionComponents
+namespace Logic.Actions.Components
 {
     public class Movement : MonoBehaviour
     {

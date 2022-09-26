@@ -3,7 +3,7 @@ using UnityEngine;
 using Utils;
 using Zenject;
 
-namespace Logic.ActionComponents
+namespace Logic.Actions.Components
 {
     public class ProjectileLauncher : MonoBehaviour
     {

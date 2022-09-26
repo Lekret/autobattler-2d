@@ -3,7 +3,7 @@ using Services.Randomizer;
 using UnityEngine;
 using Zenject;
 
-namespace Logic.ActionComponents
+namespace Logic.Actions.Components
 {
     public class DamageDealer : MonoBehaviour
     {

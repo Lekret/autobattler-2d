@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22dbf0134164bc5b36aca0bc8262332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action: {fileID: 2461994971326874321}
+  _action: {fileID: 641197135755266800}
   _health: {fileID: 6775804260796347849}
   _sprite: {fileID: 2552145885572122142}
   _extraSpriteFlip: 1
@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8229310583107618433}
-  - component: {fileID: 2461994971326874321}
+  - component: {fileID: 641197135755266800}
   - component: {fileID: 8112053291854422964}
   - component: {fileID: 389440101586184029}
   - component: {fileID: 9107190235604297482}
@@ -233,7 +233,7 @@ Transform:
   m_Father: {fileID: 2285158692861818677}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2461994971326874321
+--- !u!114 &641197135755266800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,15 +242,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5717753040657842021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4a06726c1040ccaa72fe8517e98d78, type: 3}
+  m_Script: {fileID: 11500000, guid: b2416804c0514d8eb951fa6e75089455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDelay: 0.5
+  _attackDamageDelay: 0.5
+  _spellDamageDelay: 0.5
+  _spellProbability: 0.7
   _character: {fileID: 157411113415974065}
   _movement: {fileID: 389440101586184029}
   _awaitableAnimation: {fileID: 8112053291854422964}
-  _damageDealer: {fileID: 9107190235604297482}
+  _meleeDamageDealer: {fileID: 9107190235604297482}
+  _spellDamageDealer: {fileID: 9107190235604297482}
   _animator: {fileID: 3779025896561824426}
+  _spellPrefab: {fileID: 3932331492779129544, guid: 84da644c81e972641988a5cf4e8a184b, type: 3}
 --- !u!114 &8112053291854422964
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Logic.ActionComponents;
+using Logic.Actions.Components;
 using Logic.Characters;
 using Services.CharacterStorage;
 using UnityEngine;
