@@ -25,7 +25,7 @@ namespace Logic.Actions
         {
             _target = _characterStorage.GetRandom(_character.Team.Opposite());
             var initialPosition = _character.transform.position;
-            var targetPosition = _target.transform.position;
+            var targetPosition = _target.Center.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
             yield return _awaitableAnimation.Play(AnimHashes.Attack, Attack);

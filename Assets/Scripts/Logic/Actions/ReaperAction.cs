@@ -50,7 +50,7 @@ namespace Logic.Actions
             yield return _awaitableAnimation.Play(AnimHashes.Cast);
             _animator.Play(AnimHashes.Idle);
             var spell = _instantiator.InstantiatePrefab(_spellPrefab);
-            spell.transform.position = _target.transform.position;
+            spell.transform.position = _target.Center.position;
             yield return new WaitForSeconds(_spellDamageDelay);
             _spellDamageDealer.ApplyDamage(_target);
         }
@@ -58,7 +58,7 @@ namespace Logic.Actions
         private IEnumerator AttackMelee()
         {
             var initialPosition = _character.transform.position;
-            var targetPosition = _target.transform.position;
+            var targetPosition = _target.Center.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
             var animCor = StartCoroutine(_awaitableAnimation.Play(AnimHashes.Attack));

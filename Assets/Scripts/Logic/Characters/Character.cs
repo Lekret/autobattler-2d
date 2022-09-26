@@ -8,6 +8,7 @@ namespace Logic.Characters
 {
     public class Character : MonoBehaviour
     {
+        [SerializeField] private Transform _center;
         [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private SpriteRenderer _sprite;
@@ -16,6 +17,7 @@ namespace Logic.Characters
         private bool _isDead;
         private readonly HashSet<object> _actionBlockers = new HashSet<object>();
 
+        public Transform Center => _center;
         public IHealth Health => _health;
         public Team Team { get; private set; }
         public event Action<Character> Died;
