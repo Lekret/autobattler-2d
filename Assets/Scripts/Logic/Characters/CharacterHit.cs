@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Services.NextAction;
+using UnityEngine;
+using Zenject;
 
 namespace Logic.Characters
 {
@@ -7,6 +9,8 @@ namespace Logic.Characters
         [SerializeField] private Character _character;
         [SerializeField] private Animator _animator;
 
+        [Inject] private ICharacterActionService _characterActionService;
+        
         private bool _hitPlayed;
         
         private void Start()
@@ -21,7 +25,7 @@ namespace Logic.Characters
 
         private void OnHit()
         {
-            _character.AddActionBlocker(this);
+            _characterActionService.AddBlocker(this);
             _animator.Play(AnimHashes.Hit);
             _hitPlayed = true;
         }
@@ -30,7 +34,7 @@ namespace Logic.Characters
         {
             if (_hitPlayed && hash == AnimHashes.Hit)
             {
-                _character.RemoveActionBlocker(this);
+                _characterActionService.RemoveBlocker(this);
                 _hitPlayed = false;
             }
         }

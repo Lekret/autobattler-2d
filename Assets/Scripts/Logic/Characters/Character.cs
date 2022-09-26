@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using Logic.Actions;
 using UnityEngine;
 
@@ -15,7 +14,6 @@ namespace Logic.Characters
         [SerializeField] private bool _extraSpriteFlip;
 
         private bool _isDead;
-        private readonly HashSet<object> _actionBlockers = new HashSet<object>();
 
         public Transform Center => _center;
         public IHealth Health => _health;
@@ -29,14 +27,9 @@ namespace Logic.Characters
             _health.Init(currentHp);
             SetSpriteFlipX(team == Team.Right);
         }
-        
-        public void AddActionBlocker(object blocker) => _actionBlockers.Add(blocker);
-
-        public void RemoveActionBlocker(object blocker) => _actionBlockers.Remove(blocker);
 
         public IEnumerator ExecuteAction()
         {
-            yield return new WaitWhile(() => _actionBlockers.Count > 0);
             yield return _action.Execute();
         }
         

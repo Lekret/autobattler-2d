@@ -4,6 +4,7 @@ using Logic.Characters;
 using Logic.GameStates;
 using Services.BattleSetup;
 using Services.CharacterStorage;
+using Services.NextAction;
 using Zenject;
 
 namespace Infrastructure
@@ -19,6 +20,7 @@ namespace Infrastructure
             Container.BindInterfacesTo<CharacterFactory>().AsSingle();
             Container.BindInterfacesTo<BattleSetupService>().AsSingle();
             Container.BindInterfacesTo<CharacterStorage>().AsSingle();
+            Container.BindInterfacesTo<CharacterActionService>().AsSingle();
         }
 
         private void BindGameStates()

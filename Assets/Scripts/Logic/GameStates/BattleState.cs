@@ -3,6 +3,8 @@ using Infrastructure.States;
 using Logic.Characters;
 using Services.CharacterStorage;
 using Services.CoroutineRunner;
+using Services.NextAction;
+using UnityEngine;
 
 namespace Logic.GameStates
 {
@@ -11,17 +13,20 @@ namespace Logic.GameStates
         private readonly IGameStateMachine _stateMachine;
         private readonly ICharacterStorage _characterStorage;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly ICharacterActionService _characterActionService;
         private Team _currentTeam = Team.Left;
         private bool _battleIsRunning;
 
         public BattleState(
             IGameStateMachine stateMachine, 
             ICharacterStorage characterStorage, 
-            ICoroutineRunner coroutineRunner)
+            ICoroutineRunner coroutineRunner, 
+            ICharacterActionService characterActionService)
         {
             _stateMachine = stateMachine;
             _characterStorage = characterStorage;
             _coroutineRunner = coroutineRunner;
+            _characterActionService = characterActionService;
         }
 
         public void Enter()
@@ -40,6 +45,7 @@ namespace Logic.GameStates
             while (_battleIsRunning)
             {
                 var character = _characterStorage.GetRandom(_currentTeam);
+                yield return new WaitUntil(() => _characterActionService.CanPerform());
                 yield return character.ExecuteAction();
                 _currentTeam = _currentTeam.Opposite();
             }
