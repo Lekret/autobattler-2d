@@ -4,6 +4,7 @@ using Infrastructure.States;
 using Logic.Characters;
 using Services.AssetsManagement;
 using Services.BattleSetup;
+using Services.CharacterStorage;
 using StaticData;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Logic.GameStates
     {
         private readonly IGameStateMachine _stateMachine;
         private readonly ICharacterFactory _characterFactory;
-        private readonly IAliveCharacters _aliveCharacters;
+        private readonly ICharacterStorage _characterStorage;
         private readonly IBattleSetupService _battleSetupService;
         private readonly IAssetProvider _assetProvider;
         private readonly SpawnPoints _spawnPoints;
@@ -21,14 +22,14 @@ namespace Logic.GameStates
         public SetupState(
             IGameStateMachine stateMachine, 
             ICharacterFactory characterFactory, 
-            IAliveCharacters aliveCharacters,
+            ICharacterStorage characterStorage,
             IBattleSetupService battleSetupService,
             IAssetProvider assetProvider,
             SpawnPoints spawnPoints)
         {
             _stateMachine = stateMachine;
             _characterFactory = characterFactory;
-            _aliveCharacters = aliveCharacters;
+            _characterStorage = characterStorage;
             _battleSetupService = battleSetupService;
             _assetProvider = assetProvider;
             _spawnPoints = spawnPoints;
@@ -48,7 +49,7 @@ namespace Logic.GameStates
                 _battleSetupService.GetRightTeamData(),
                 _spawnPoints.RightSpawnPoints);
             var characters = await Task.WhenAll(characterTasks);
-            _aliveCharacters.AddRange(characters);
+            _characterStorage.AddRange(characters);
             _assetProvider.Cleanup();
             _stateMachine.Enter<BattleState>();
         }

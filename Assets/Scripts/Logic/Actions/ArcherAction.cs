@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Logic.ActionComponents;
 using Logic.Characters;
-using Services.CharacterSelector;
+using Services.CharacterStorage;
 using UnityEngine;
 using Zenject;
 
@@ -15,14 +15,14 @@ namespace Logic.Actions
         [SerializeField] private DamageDealer _damageDealer;
         [SerializeField] private Animator _animator;
 
-        [Inject] private ICharacterSelector _characterSelector;
+        [Inject] private ICharacterStorage _characterStorage;
         
         private Character _target;
         private Coroutine _projectileRoutine;
 
         public override IEnumerator Execute()
         {
-            _target = _characterSelector.GetSingle(_character.Team.Opposite());
+            _target = _characterStorage.GetRandom(_character.Team.Opposite());
             yield return _awaitableAnimation.Play(AnimHashes.Attack, ShootProjectile);
             yield return _projectileRoutine;
             _damageDealer.ApplyDamage(_target);

@@ -1,36 +1,32 @@
 ﻿using System.Collections;
 using Infrastructure.States;
 using Logic.Characters;
+using Services.CharacterStorage;
 using Services.CoroutineRunner;
-using Services.Randomizer;
-using UnityEngine;
 
 namespace Logic.GameStates
 {
     public class BattleState : IEnterState, IExitState
     {
         private readonly IGameStateMachine _stateMachine;
-        private readonly IAliveCharacters _aliveCharacters;
-        private readonly IRandomizer _randomizer;
+        private readonly ICharacterStorage _characterStorage;
         private readonly ICoroutineRunner _coroutineRunner;
         private Team _currentTeam = Team.Left;
         private bool _battleIsRunning;
 
         public BattleState(
             IGameStateMachine stateMachine, 
-            IAliveCharacters aliveCharacters, 
-            IRandomizer randomizer, 
+            ICharacterStorage characterStorage, 
             ICoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
-            _aliveCharacters = aliveCharacters;
-            _randomizer = randomizer;
+            _characterStorage = characterStorage;
             _coroutineRunner = coroutineRunner;
         }
 
         public void Enter()
         {
-            foreach (var character in _aliveCharacters.GetAll())
+            foreach (var character in _characterStorage.GetAll())
             {
                 character.Died += OnCharacterDied;
             }
@@ -43,8 +39,7 @@ namespace Logic.GameStates
         {
             while (_battleIsRunning)
             {
-                var characters = _aliveCharacters.GetByTeam(_currentTeam);
-                var character = _randomizer.GetRandom(characters);
+                var character = _characterStorage.GetRandom(_currentTeam);
                 yield return character.ExecuteAction();
                 _currentTeam = _currentTeam.Opposite();
             }
@@ -52,7 +47,7 @@ namespace Logic.GameStates
 
         public void Exit()
         {
-            foreach (var character in _aliveCharacters.GetAll())
+            foreach (var character in _characterStorage.GetAll())
             {
                 character.Died -= OnCharacterDied;
             }
@@ -71,8 +66,8 @@ namespace Logic.GameStates
 
         private Team? GetWinnersTeam()
         {
-            var leftAlive = _aliveCharacters.GetByTeam(Team.Left);
-            var rightAlive = _aliveCharacters.GetByTeam(Team.Right);
+            var leftAlive = _characterStorage.GetAll(Team.Left);
+            var rightAlive = _characterStorage.GetAll(Team.Right);
             if (leftAlive.Count > 0 && rightAlive.Count > 0)
             {
                 return null;

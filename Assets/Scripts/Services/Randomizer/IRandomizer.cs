@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Services.Randomizer
 {
@@ -11,7 +11,7 @@ namespace Services.Randomizer
 
     public static class RandomizerExtensions
     {
-        public static T GetRandom<T>(this IRandomizer randomizer, IReadOnlyList<T> items)
+        public static T GetRandom<T>(this IRandomizer randomizer, List<T> items)
         {
             if (items.Count == 0)
             {
@@ -21,7 +21,7 @@ namespace Services.Randomizer
             return items[rnd];
         }
         
-        public static void Shuffle<T>(this IRandomizer randomizer, IList<T> list)
+        public static void Shuffle<T>(this IRandomizer randomizer, List<T> list)
         {
             for (var i = list.Count - 1; i > 0; i--)
             {
