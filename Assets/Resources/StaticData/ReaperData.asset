@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b530708d434d43b816cdcac089c3ac, type: 3}
+  m_Name: ReaperData
+  m_EditorClassIdentifier: 
+  Id: reaper
+  Name: Reaper
+  Hp: 100
+  PrefabReference:
+    m_AssetGUID: 2db67c947ca28ed419e0a58127afa67c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

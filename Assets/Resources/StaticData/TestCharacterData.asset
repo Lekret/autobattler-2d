@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestCharacterData
   m_EditorClassIdentifier: 
   Left:
-  - {fileID: 11400000, guid: d2fe18f9dabc26c4f8cceb6324fea53f, type: 2}
+  - {fileID: 11400000, guid: 8c514a64d52a1fe4ea91e2951e09c110, type: 2}
   - {fileID: 11400000, guid: d2fe18f9dabc26c4f8cceb6324fea53f, type: 2}
   Right:
   - {fileID: 11400000, guid: 2018e704f6a34fc468f287eb929dc48d, type: 2}
-  - {fileID: 11400000, guid: 2018e704f6a34fc468f287eb929dc48d, type: 2}
+  - {fileID: 11400000, guid: 8c514a64d52a1fe4ea91e2951e09c110, type: 2}
