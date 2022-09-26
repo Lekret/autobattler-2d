@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Logic.Actions;
+using UnityEngine;
 
 namespace Logic.Characters
 {
@@ -12,6 +11,7 @@ namespace Logic.Characters
         [SerializeField] private CharacterAction _action;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private bool _extraSpriteFlip;
 
         private bool _isDead;
         private readonly HashSet<object> _actionBlockers = new HashSet<object>();
@@ -40,7 +40,7 @@ namespace Logic.Characters
         
         public void SetSpriteFlipX(bool flipX)
         {
-            _sprite.flipX = flipX;
+            _sprite.flipX = _extraSpriteFlip ^ flipX;
         }
 
         public void ResetSpriteFlip()

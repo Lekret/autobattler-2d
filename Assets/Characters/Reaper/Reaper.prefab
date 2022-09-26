@@ -157,6 +157,7 @@ MonoBehaviour:
   _action: {fileID: 2461994971326874321}
   _health: {fileID: 6775804260796347849}
   _sprite: {fileID: 2552145885572122142}
+  _extraSpriteFlip: 1
 --- !u!114 &6775804260796347849
 MonoBehaviour:
   m_ObjectHideFlags: 0
