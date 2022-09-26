@@ -54,7 +54,9 @@ namespace Logic.GameStates
             _stateMachine.Enter<BattleState>();
         }
 
-        private void SpawnCharacters(ICollection<Task<Character>> characterTasks, Team team,
+        private void SpawnCharacters(
+            ICollection<Task<Character>> characterTasks,
+            Team team,
             IReadOnlyList<CharacterStaticData> characterData,
             IReadOnlyList<Transform> spawnPoints)
         {
