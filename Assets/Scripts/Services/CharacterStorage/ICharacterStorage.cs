@@ -7,6 +7,7 @@ namespace Services.CharacterStorage
     public interface ICharacterStorage
     {
         void AddRange(IEnumerable<Character> characters);
+        void Remove(Character character);
         IReadOnlyList<Character> GetAll();
         IReadOnlyList<Character> GetAll(Team team);
         Character GetRandom(Team team);

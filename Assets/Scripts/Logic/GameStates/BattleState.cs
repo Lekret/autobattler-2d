@@ -56,6 +56,7 @@ namespace Logic.GameStates
         private void OnCharacterDied(Character deadCharacter)
         {
             deadCharacter.Died -= OnCharacterDied;
+            _characterStorage.Remove(deadCharacter);
             var winnersTeam = GetWinnersTeam();
             if (winnersTeam.HasValue)
             {

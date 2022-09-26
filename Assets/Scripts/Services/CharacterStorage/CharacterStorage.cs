@@ -27,8 +27,13 @@ namespace Services.CharacterStorage
             {
                 _characters.Add(character);
                 _charactersByTeam[character.Team].Add(character);
-                character.Died += OnDied;
             }
+        }
+        
+        public void Remove(Character character)
+        {
+            _characters.Remove(character);
+            _charactersByTeam[character.Team].Remove(character);
         }
         
         public IReadOnlyList<Character> GetAll()
@@ -67,13 +72,6 @@ namespace Services.CharacterStorage
             {
                 buffer.Add(_shuffleBuffer[i]);
             }
-        }
-        
-        private void OnDied(Character character)
-        {
-            character.Died -= OnDied;
-            _characters.Remove(character);
-            _charactersByTeam[character.Team].Remove(character);
         }
     }
 }
