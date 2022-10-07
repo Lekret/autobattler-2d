@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Logic.Actions.Components
@@ -8,15 +7,13 @@ namespace Logic.Actions.Components
     {
         [SerializeField] private Animator _animator;
 
-        private Action _onEnter;
         private bool _triggered;
         private int _hash;
 
-        public IEnumerator Play(int hash, Action onEnter = null)
+        public IEnumerator Play(int hash)
         {
             _triggered = false;
             _hash = hash;
-            _onEnter = onEnter;
             _animator.Play(_hash);
             yield return new WaitUntil(() =>
             {
@@ -25,16 +22,12 @@ namespace Logic.Actions.Components
                 return state.shortNameHash == _hash &&
                        state.normalizedTime >= 1;
             });
-            _onEnter = null;
         }
 
         public void OnStateEntered(int hash)
         {
             if (hash == _hash)
-            {
-                _onEnter?.Invoke();
                 _triggered = true;
-            }
         }
     }
 }

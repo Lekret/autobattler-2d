@@ -9,6 +9,7 @@ namespace Logic.Actions
 {
     public class ArcherAction : CharacterAction
     {
+        [SerializeField] private float _attackDelay;
         [SerializeField] private Character _character;
         [SerializeField] private ProjectileLauncher _projectileLauncher;
         [SerializeField] private AwaitableAnimation _awaitableAnimation;
@@ -18,22 +19,18 @@ namespace Logic.Actions
         [Inject] private ICharacterStorage _characterStorage;
         
         private Character _target;
-        private Coroutine _projectileRoutine;
 
         public override IEnumerator Execute()
         {
             _target = _characterStorage.GetRandom(_character.Team.Opposite());
-            yield return _awaitableAnimation.Play(AnimHashes.Attack, ShootProjectile);
-            yield return _projectileRoutine;
+            var animCor = StartCoroutine(_awaitableAnimation.Play(AnimHashes.Attack));
+            yield return new WaitForSeconds(_attackDelay);
+            var projectileRoutine = StartCoroutine(_projectileLauncher.LaunchAt(_target.transform.position));
+            yield return projectileRoutine;
             _damageDealer.ApplyDamage(_target);
+            yield return animCor;
             _animator.Play(AnimHashes.Idle);
-            _projectileRoutine = null;
             _target = null;
-        }
-
-        private void ShootProjectile()
-        {
-            _projectileRoutine = StartCoroutine(_projectileLauncher.LaunchAt(_target.transform.position));
         }
     }
 }

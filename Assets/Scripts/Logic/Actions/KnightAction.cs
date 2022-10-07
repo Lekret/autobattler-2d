@@ -19,7 +19,6 @@ namespace Logic.Actions
         [Inject] private ICharacterStorage _characterStorage;
         
         private Character _target;
-        private Coroutine _attackRoutine;
 
         public override IEnumerator Execute()
         {
@@ -28,24 +27,14 @@ namespace Logic.Actions
             var targetPosition = _target.Center.position;
             var offset = (initialPosition - targetPosition).normalized;
             yield return _movement.MoveTo(targetPosition + offset);
-            yield return _awaitableAnimation.Play(AnimHashes.Attack, Attack);
-            yield return _attackRoutine;
+            var animCor = StartCoroutine(_awaitableAnimation.Play(AnimHashes.Attack));
+            yield return new WaitForSeconds(_attackDelay);
+            _damageDealer.ApplyDamage(_target);
+            yield return animCor;
             yield return _movement.MoveTo(initialPosition);
             _character.ResetSpriteFlip();
             _animator.Play(AnimHashes.Idle);
-            _attackRoutine = null;
             _target = null;
-        }
-
-        private void Attack()
-        {
-            _attackRoutine = StartCoroutine(AttackWithDelay());
-        }
-
-        private IEnumerator AttackWithDelay()
-        {
-            yield return new WaitForSeconds(_attackDelay);
-            _damageDealer.ApplyDamage(_target);
         }
     }
 }
