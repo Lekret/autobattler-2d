@@ -19,8 +19,8 @@ namespace Logic.Characters
         
         public async Task<Character> CreateAsync(CharacterStaticData data, Team team, Vector2 position)
         {
-            var prefab = _assetProvider.LoadAsync<GameObject>(data.PrefabReference);
-            var character = _instantiator.InstantiatePrefabForComponent<Character>(await prefab);
+            var prefab = await _assetProvider.LoadAsync<GameObject>(data.PrefabReference);
+            var character = _instantiator.InstantiatePrefabForComponent<Character>(prefab);
             character.Init(team, data.Hp);
             character.transform.position = position;
             ConfigureAnimatorListeners(character);
